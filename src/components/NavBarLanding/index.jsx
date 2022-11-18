@@ -1,6 +1,9 @@
-import "./style.css";
-import { FaSearch } from "react-icons/fa";
+import React from 'react';
+import { BiSearchAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import "../NavBarLanding/navbar-style.css";
+import FavoriteIcon from '../../assets/Favorite.svg';
+import CartIcon from '../../assets/Cart.svg';
 
 function NavBarLanding() {
   return (
@@ -17,7 +20,7 @@ function NavBarLanding() {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span className="navbar-toggler-icon"></span>
+        <span className="nav          bar-toggler-icon"></span>
       </button>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -30,26 +33,26 @@ function NavBarLanding() {
               aria-label="Search Input"
             />
             <div className="input-group-append">
-              <span className="input-group-text search-icon-cutom">
-                <FaSearch />
+              <span className="input-group-text search-icon-custom">
+                <BiSearchAlt style={{width:20}}/>
               </span>
             </div>
           </div>
         </div>
         <ul className="navbar-nav ml-auto mr-3">
           <li className="nav-item active">
-            <Link to="/Home" className="nav-link">
-              Keranjang
+            <Link to="/Home" className="circle-button mr-4">
+              <img src={FavoriteIcon} alt="" />
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/Home" className="nav-link">
-              Favorite
+            <Link to="/Home" className="circle-button mr-4">
+              <img src={CartIcon} alt="" />
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/Home" className="nav-link">
-              Login
+            <Link to="/Home" className="square-button" style={{ textDecoration: 'none'}}>
+              <h4>Login</h4>
             </Link>
           </li>
         </ul>
