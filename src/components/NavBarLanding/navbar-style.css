@@ -1,6 +1,6 @@
 .bg-custom{
     background: rgb(253, 178, 72);
-    background: linear-gradient(180deg, rgba(153,178,72,1)0%, rgba(153,178,72,1) 80%, rgba(255,196,68,90) 100%);
+    background: linear-gradient(180deg, rgba(253,178,72,1)0%, rgba(253,178,72,1) 80%, rgba(255,196,68,90) 100%);
 }
 
 .input-group{
@@ -13,7 +13,7 @@
     padding-left: 30px !important;
 }
 
-.search-icon-custom{
+.search-icon-custom-nav{
     border-radius: 0 50px 50px 0 !important;
     border: 0 !important;
     background-color: white !important;
