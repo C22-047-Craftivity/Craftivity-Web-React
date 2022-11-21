@@ -51,7 +51,7 @@ function NavBarLanding() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/Home" className="square-button" style={{ textDecoration: 'none'}}>
+            <Link to="/login" className="square-button" style={{ textDecoration: 'none'}}>
               <h4>Login</h4>
             </Link>
           </li>

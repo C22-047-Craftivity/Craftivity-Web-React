@@ -1,0 +1,13 @@
+.card-terlaris{
+    height: 250px;
+    border-radius: 15px !important;
+}
+
+.card-body-terlaris{
+    position: absolute;
+    bottom: 0px;
+    width: 80%;
+    border-radius: 0 30px 0 0;
+    background-color: #FDB248;
+    padding: 15px;
+}
