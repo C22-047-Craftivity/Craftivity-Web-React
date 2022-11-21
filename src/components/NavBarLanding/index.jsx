@@ -33,7 +33,7 @@ function NavBarLanding() {
               aria-label="Search Input"
             />
             <div className="input-group-append">
-              <span className="input-group-text search-icon-custom">
+              <span className="input-group-text search-icon-custom-nav">
                 <BiSearchAlt style={{width:20}}/>
               </span>
             </div>
