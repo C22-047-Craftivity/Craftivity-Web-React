@@ -1,10 +1,12 @@
 .bg-custom{
-    background-color: #F4A274 ;
+    background: rgb(253, 178, 72);
+    background: linear-gradient(180deg, rgba(153,178,72,1)0%, rgba(153,178,72,1) 80%, rgba(255,196,68,90) 100%);
 }
 
 .input-group{
     padding: 10px;
 }
+
 .search-input-custom{
     border: 0 !important;
     border-radius: 50px 0 0 50px !important;

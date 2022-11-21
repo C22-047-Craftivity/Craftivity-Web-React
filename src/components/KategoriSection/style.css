@@ -1,0 +1,19 @@
+.item-kategori img{
+    border-radius: 100px;
+    width: 131px;
+    height: 131px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.item-kategori{
+    text-align: center;
+}
+
+.item-kategori p{
+    margin-top: 10px;
+}
+
+.container-kategori{
+    padding: 20px;
+}
