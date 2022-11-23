@@ -11,3 +11,65 @@
     object-position: center;
     border-radius: 34px;
 }
+
+.block{
+    display: block;
+    background-color: black;
+    width: 2px;
+    height: 20px;
+}
+
+.image-toko{
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+}
+
+.btn-count{
+    width: 40px;
+    height: 40px;
+    background-color: #F8956B;
+    display: inline-block;
+    border: none;
+    text-align: center;
+    border-radius: 50%;
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.image-detail img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+}
+
+.text-total-review{
+    color: #5EB86D;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.text-total-bintang{
+    color: #FFC045;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.card-review{
+    background-color: aliceblue;
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.image-review{
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 100px;
+}
