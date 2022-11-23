@@ -1,11 +1,11 @@
-import StarIcon from '../../assets/Star.svg';
+// import StarIcon from '../../assets/Star.svg';
 
-function WidgetStar() {
-    return (
-        <div className="row">
+// function WidgetStar() {
+//     return (
+//         <div className="row">
             
-        </div>
-    );
-}
+//         </div>
+//     );
+// }
 
-export default WidgetStar;
+// export default WidgetStar;

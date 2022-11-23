@@ -1,9 +1,9 @@
 .card-product{
-    box-shadow: 0px 2px 14px 0px rgba(0, 0, 0, 0.4);
     background-color: white;
     border-radius: 34px;
     border: 2px solid #FA984D;
     padding: 14px;
+    transition: 0.3s;
 }
 
 .card-product .image-product img{
@@ -30,6 +30,10 @@
 
 .product-button-beli:hover{
     box-shadow: 0px 10px 17px 0px #FA984D;
+}
+
+.card-product:hover{
+    box-shadow: 0px 2px 14px 0px rgba(0, 0, 0, 0.4);
 }
 
 .body-product{

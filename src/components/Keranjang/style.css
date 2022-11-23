@@ -1,0 +1,13 @@
+.card-product-keranjang{
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.image-product-keranjang{
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 34px;
+}
