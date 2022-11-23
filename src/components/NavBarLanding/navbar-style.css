@@ -1,6 +1,6 @@
 .bg-custom{
-    background: rgb(253, 178, 72);
-    background: linear-gradient(180deg, rgba(253,178,72,1)0%, rgba(253,178,72,1) 80%, rgba(255,196,68,90) 100%);
+    background: rgb(253,178,72);
+    background: linear-gradient(180deg, rgba(253,178,72,1) 0%, rgba(255,192,69,1) 80%, rgba(255,196,68,0) 100%);
 }
 
 .input-group{

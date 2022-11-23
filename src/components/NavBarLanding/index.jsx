@@ -41,12 +41,12 @@ function NavBarLanding() {
         </div>
         <ul className="navbar-nav ml-auto mr-3">
           <li className="nav-item active">
-            <Link to="/Home" className="circle-button mr-4">
+            <Link to="/favorite" className="circle-button mr-4">
               <img src={FavoriteIcon} alt="" />
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/Home" className="circle-button mr-4">
+            <Link to="/keranjang" className="circle-button mr-4">
               <img src={CartIcon} alt="" />
             </Link>
           </li>
