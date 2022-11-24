@@ -1,32 +1,31 @@
 // import { useParams, useNavigate } from 'react-router-dom';
-import NavBarLanding from "../../components/NavBarLanding";
-import Footer from "../../components/Footer";
-import populer from "../../components/PopulerSection/populer";
-import { useEffect } from "react";
+import NavBarLanding from '../../components/NavBarLanding'
+import Footer from '../../components/Footer'
+import populer from '../../components/PopulerSection/populer'
+import { useEffect, useState } from 'react'
 
-import DeskripsiDetail from "../../components/Detail/deskripsi-detail";
-import ImageDetail from "../../components/Detail/image-detail";
-import RincianDetail from "../../components/Detail/rincian-detail";
-import TokoDetail from "../../components/Detail/toko-detail";
-import CountDetail from "../../components/Detail/count-detail";
-import { ButtonBeli, ButtonKeranjang } from "../../components/Button";
-import StarWidget from "../../components/Star";
-import ReviewItem from "../../components/Review/review-item";
-import { useState } from "react";
+import DeskripsiDetail from '../../components/Detail/deskripsi-detail'
+import ImageDetail from '../../components/Detail/image-detail'
+import RincianDetail from '../../components/Detail/rincian-detail'
+import TokoDetail from '../../components/Detail/toko-detail'
+import CountDetail from '../../components/Detail/count-detail'
+import { ButtonBeli, ButtonKeranjang } from '../../components/Button'
+import StarWidget from '../../components/Star'
+import ReviewItem from '../../components/Review/review-item'
 
-import "../Detail/style.css"
+import '../Detail/style.css'
 
-function Index() {
-  const data = populer[0];
-  const [jumlah, setJumlah] = useState(1);
-  const [totalHarga, setTotal] = useState(data.harga);
-  
+function Index () {
+  const data = populer[0]
+  const [jumlah, setJumlah] = useState(1)
+  const [totalHarga, setTotal] = useState(data.harga)
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "smooth"
-    });
+      behavior: 'smooth'
+    })
   }, [])
 
   return (
@@ -41,7 +40,7 @@ function Index() {
           <RincianDetail data={data} />
           <TokoDetail data={data} />
           <DeskripsiDetail data={data} />
-          
+
           <span className="font-weight-bold">Banyak Beli</span>
           <div className="row">
             <CountDetail
@@ -66,7 +65,7 @@ function Index() {
       <div className="row text-center mt-4">
         <div className="col">
             <h6 className="font-weight-bold">Total Review</h6>
-            <div className="text-total-review">125 <span style={{fontSize : 30}}>review</span></div>
+            <div className="text-total-review">125 <span style={{ fontSize: 30 }}>review</span></div>
         </div>
         <div className="col">
             <h6 className="font-weight-bold">Rata-rata Rating</h6>
@@ -83,6 +82,6 @@ function Index() {
       </div>
       <Footer />
     </div>
-  );
+  )
 }
-export default Index;
+export default Index

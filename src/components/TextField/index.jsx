@@ -1,9 +1,9 @@
-import "../TextField/textfield-style.css";
+import '../TextField/textfield-style.css'
 
-function TextField({id, placeholder}) {
-    return (
-        <input id={id} className="form-control custom-input" placeholder={placeholder}/>
-    );
+function TextField ({ id, placeholder }) {
+  return (
+    <input id={id} className="form-control custom-input" placeholder={placeholder}/>
+  )
 }
 
-export default TextField;
+export default TextField

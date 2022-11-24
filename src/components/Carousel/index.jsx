@@ -1,8 +1,8 @@
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "../Carousel/style.css";
-import React from "react";
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import '../Carousel/style.css'
+import React from 'react'
 
 const CarouselSlider = ({ images }) => {
   const settings = {
@@ -14,7 +14,7 @@ const CarouselSlider = ({ images }) => {
     autoplay: true,
     autoplaySpeed: 5000,
     dotsClass: 'slick-dots'
-  };
+  }
 
   return (
     <div>
@@ -26,6 +26,6 @@ const CarouselSlider = ({ images }) => {
         ))}
       </Slider>
     </div>
-  );
-};
-export default CarouselSlider;
+  )
+}
+export default CarouselSlider

@@ -1,14 +1,14 @@
-import CountDetail from "../Detail/count-detail";
-import { useState } from "react";
-import { ButtonHapus } from "../Button";
-import "../Keranjang/style.css"
+import CountDetail from '../Detail/count-detail'
+import { useState } from 'react'
+import { ButtonHapus } from '../Button'
+import '../Keranjang/style.css'
 
-function Index({ keranjang }) {
-  const [jumlah, setJumlah] = useState(1);
-  const [totalHarga, setTotal] = useState(keranjang.harga);
-  const [pilih, setPilih] = useState(false);
+function Index ({ keranjang }) {
+  const [jumlah, setJumlah] = useState(1)
+  const [totalHarga, setTotal] = useState(keranjang.harga)
+  const [pilih, setPilih] = useState(false)
 
-  const handleClick = () => setPilih(!pilih);
+  const handleClick = () => setPilih(!pilih)
 
   return (
     <div className="row align-items-center mt-3 card-product-keranjang">
@@ -38,7 +38,7 @@ function Index({ keranjang }) {
         <ButtonHapus/>
       </div>
     </div>
-  );
+  )
 }
 
-export default Index;
+export default Index
