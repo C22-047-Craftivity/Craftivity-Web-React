@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import NavBarLanding from '../../components/NavBarLanding'
 import CarouselSlider from '../../components/Carousel'
 import images from '../../components/Carousel/image'
@@ -8,8 +9,12 @@ import terlaris from '../../components/TerlarisSection/terlaris'
 import PopulerSection from '../../components/PopulerSection'
 import populer from '../../components/PopulerSection/populer'
 import Footer from '../../components/Footer'
+import Loading from '../../components/Loading'
 
 function Index () {
+  const [loading, setLoading] = useState(false)
+
+  if (loading) { return (<Loading />) }
   return (
     <div>
         <NavBarLanding/>
