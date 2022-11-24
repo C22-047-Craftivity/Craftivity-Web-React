@@ -1,6 +1,6 @@
-import StarWidget from '../Star';
+import StarWidget from '../Star'
 
-function RincianDetail({data}) {
+function RincianDetail ({ data }) {
   return (
     <div className="row m-0 mb-4 d-flex align-items-center justify-content-between">
       <h6>1289 terjual</h6>
@@ -12,7 +12,7 @@ function RincianDetail({data}) {
       <span className="block"></span>
       <h6>Kategori cincin</h6>
     </div>
-  );
+  )
 }
 
-export default RincianDetail;
+export default RincianDetail

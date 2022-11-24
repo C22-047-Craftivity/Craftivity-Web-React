@@ -1,4 +1,4 @@
-function ReviewCreate() {
+function ReviewCreate () {
   return (
     <div id="accordion">
       <div class="card border-0 shadow-sm">
@@ -43,7 +43,7 @@ function ReviewCreate() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default ReviewCreate;
+export default ReviewCreate

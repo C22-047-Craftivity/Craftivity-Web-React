@@ -1,17 +1,17 @@
-function CountDetail({ harga, setJumlah, setTotal, jumlah, totalHarga }) {
+function CountDetail ({ harga, setJumlah, setTotal, jumlah, totalHarga }) {
   const adding = () => {
-    setJumlah((jumlah += 1));
-    const sum = jumlah * harga;
-    setTotal(sum);
-  };
+    setJumlah((jumlah += 1))
+    const sum = jumlah * harga
+    setTotal(sum)
+  }
 
   const substracting = () => {
     if (jumlah > 1) {
-      setJumlah((jumlah -= 1));
+      setJumlah((jumlah -= 1))
     }
-    const sum = jumlah * harga;
-    setTotal(sum);
-  };
+    const sum = jumlah * harga
+    setTotal(sum)
+  }
   return (
     <div className="col-3">
       <div className="row m-0 d-flex align-items-center justify-content-between">
@@ -24,7 +24,7 @@ function CountDetail({ harga, setJumlah, setTotal, jumlah, totalHarga }) {
         </button>
       </div>
     </div>
-  );
+  )
 }
 
-export default CountDetail;
+export default CountDetail
