@@ -4,7 +4,7 @@ import useInput from '../../hooks/useInput'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import './style.css'
 import Swal from 'sweetalert2'
-import loginVectorUser from '../../assets/LoginVektorUser.png'
+import loginVectorMitra from '../../assets/LoginVektorMitra.png'
 import Loading from '../../components/Loading'
 
 function Index () {
@@ -46,9 +46,9 @@ function Index () {
     <div className='login'>
       <Loading visible={loading} />
       <div className='leftSection'>
-          <img src={loginVectorUser} alt='' height={500} width={450} />
+          <img src={loginVectorMitra} alt='' height={450} width={450} className='mt-4' />
           <h3>Selamat Datang</h3>
-          <p>Agar anda bisa menggunakan aplikasi Craftivity, maka anda harus login terlebih dahulu</p>
+          <p>Nikmati kemudahan berjualan dan saling terhubung dengan para pengrajin di Craftivity</p>
       </div>
       <div className='rightSection'>
           <p className='intro'>Selamat Datang</p>
@@ -59,8 +59,7 @@ function Index () {
           </div>
           <button className='btn-masuk' onClick={ () => login() }>MASUK</button>
           <div className="text-center">
-              <p>Belum punya akun? daftar sekarang <Link to="/registerUser"><u>di sini</u></Link></p>
-              <p>Mau jadi mitra? gabung sekarang <Link to="/loginMitra"><u>di sini</u></Link></p>
+              <p>Belum punya akun? daftar sekarang <Link to="/registerMitra"><u>di sini</u></Link></p>
           </div>
       </div>
     </div>

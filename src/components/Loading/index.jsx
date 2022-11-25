@@ -1,10 +1,10 @@
 import React from 'react'
 import './style.css'
 
-export default function Loading() {
+export default function Loading ({ visible = true }) {
   return (
-    <div class='loading'>
-        <div class="ring">Loading<span class="dot"></span></div>
+    visible && <div className='loading'>
+      <div class="ring">Loading<span class="dot"></span></div>
     </div>
   )
 }

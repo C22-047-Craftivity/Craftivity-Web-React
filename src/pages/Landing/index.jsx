@@ -14,7 +14,7 @@ import Loading from '../../components/Loading'
 function Index () {
   const [loading, setLoading] = useState(false)
 
-  if (loading) { return (<Loading />) }
+  if (loading) { return (<Loading visible={loading} />) }
   return (
     <div>
         <NavBarLanding/>
