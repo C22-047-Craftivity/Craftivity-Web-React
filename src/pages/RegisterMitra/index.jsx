@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useInput from '../../hooks/useInput'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
+import { registerMitra } from '../../confiq/firebase'
 import './style.css'
 import Swal from 'sweetalert2'
 import registerVektorMitra from '../../assets/RegisterVektorMitra.png'
@@ -15,6 +16,7 @@ function Index () {
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordRepeat, setShowPasswordRepeat] = useState(false)
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   function showPass () {
     const password = document.getElementById('password')
@@ -38,21 +40,15 @@ function Index () {
     }
   }
 
-  function Register () {
-    if (namaMitra !== '' && email !== '' && password !== '' && password === passwordRepeat) {
+  async function Register (event) {
+    event.preventDefault()
+    if (password === passwordRepeat) {
       setLoading(true)
-      setTimeout(() => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          text: namaMitra + ', ' + email + ', ' + password + ', ' + passwordRepeat,
-          showConfirmButton: false,
-          timer: 1500
-        })
-        setLoading(false)
-      }, 3000)
+      await registerMitra(namaMitra, email, password)
+      setLoading(false)
+      navigate('/loginMitra')
     } else {
-      Swal.fire('Gagal', 'Pastikan semua data telah terisi dengan benar', 'error')
+      Swal.fire('Gagal', 'Password tidak sesuai', 'error')
     }
   }
 
@@ -66,21 +62,21 @@ function Index () {
       </div>
       <div className='rightSection'>
           <p className='intro'>Gabung Mitra</p>
-          <div className='input-register'>
+          <form onSubmit={Register} className='input-register'>
               <input type="text" placeholder='Masukkan Nama Tokomu...' id="namaMitra" value={namaMitra} onChange={setNamaMitra} required />
               <input type="email" placeholder='Masukkan Email...' id="email" value={email} onChange={setEmail} required />
               <div className='input-passwordRegister'>
                 <div>
-                  <input type="password" placeholder='Masukkan Password...' id="password" value={password} onChange={setPassword} required />
+                  <input type="password" minLength={6} placeholder='Masukkan 6 digit Password...' id="password" value={password} onChange={setPassword} required />
                   {!showPassword ? <FiEyeOff onClick={ () => showPass() } className='iconPassUser'/> : <FiEye onClick={() => showPass()} className='iconPassUser'/>}
                 </div>
                 <div>
-                  <input type="password" placeholder='Ulangi Password...' id="passwordRepeat" value={passwordRepeat} onChange={setPasswordRepeat} required />
+                  <input type="password" minLength={6} placeholder='Konfirmasi Password...' id="passwordRepeat" value={passwordRepeat} onChange={setPasswordRepeat} required />
                   {!showPasswordRepeat ? <FiEyeOff onClick={ () => showPassRepeat() } className='iconPassRepeat'/> : <FiEye onClick={() => showPassRepeat()} className='iconPassRepeat'/>}
                 </div>
               </div>
-          </div>
-          <button type='submit' className='btn-daftar' onClick={ () => Register() }>DAFTAR</button>
+            <button type='submit' className='btn-daftar'>DAFTAR</button>
+          </form>
           <div className="text-center">
               <p>Sudah punya akun? masuk sekarang <Link to="/"><u>di sini</u></Link></p>
           </div>
