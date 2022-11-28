@@ -44,9 +44,18 @@ function Index () {
     event.preventDefault()
     if (password === passwordRepeat) {
       setLoading(true)
-      await registerMitra(namaMitra, email, password)
+      const { error } = await registerMitra(namaMitra, email, password)
+      if (!error) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          text: 'Toko berhasil di buat',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        navigate('/loginMitra')
+      }
       setLoading(false)
-      navigate('/loginMitra')
     } else {
       Swal.fire('Gagal', 'Password tidak sesuai', 'error')
     }
