@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth'
 import { getDatabase, ref, set, child, get } from 'firebase/database'
 // import 'firebase/firestore'
 import Swal from 'sweetalert2'
@@ -84,8 +84,9 @@ function saveMitraData (id, namaToko, email, imageUrl = 'https://firebasestorage
 export function login (email, password) {
   return (
     signInWithEmailAndPassword(auth, email, password)
-      .then(res => {
-        return { error: false, data: res.user.uid }
+      .then(() => {
+        const user = auth.currentUser
+        return { error: false, data: user }
       })
       .catch((error) => {
         Swal.fire({
@@ -101,6 +102,30 @@ export function login (email, password) {
   )
 }
 
+export function resetPassword (email) {
+  return (
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        Swal.fire('Berhasil', 'Silahkan cek email Anda!', 'success')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  )
+}
+
+export function logout () {
+  return (
+    signOut(auth)
+      .then(() => {
+        return { error: false }
+      })
+      .catch(() => {
+        return { error: true }
+      })
+  )
+}
+
 export function getMitra () {
   const dbref = ref(database)
   return (
@@ -112,7 +137,26 @@ export function getMitra () {
           const childData = childSnapshot.val()
           data.push(childData)
         })
-        return { data }
+        return { DataMitra: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  )
+}
+
+export function getUser () {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/users'))
+      .then((snapshot) => {
+        const data = []
+        snapshot.forEach((childSnapshot) => {
+          const childKey = childSnapshot.key
+          const childData = childSnapshot.val()
+          data.push(childData)
+        })
+        return { DataUser: data }
       })
       .catch((error) => {
         console.error(error)
