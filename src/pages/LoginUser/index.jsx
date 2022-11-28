@@ -1,17 +1,18 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useInput from '../../hooks/useInput'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import './style.css'
-import Swal from 'sweetalert2'
+import { login } from '../../confiq/firebase'
 import loginVectorUser from '../../assets/LoginVektorUser.png'
 import Loading from '../../components/Loading'
 
-function Index () {
+function Index ({ onloginUser }) {
   const [email, setEmail] = useInput('')
   const [password, setPassword] = useInput('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   function showPass () {
     const password = document.getElementById('password')
@@ -24,22 +25,15 @@ function Index () {
     }
   }
 
-  function login () {
-    if (email !== '' && password !== '') {
-      setLoading(true)
-      setTimeout(() => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          text: 'email: ' + email + ' dan pass: ' + password + ' disimpan',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        setLoading(false)
-      }, 3000)
-    } else {
-      Swal.fire('Gagal', 'Pastikan semua data telah terisi', 'error')
+  async function loginUser (event) {
+    event.preventDefault()
+    setLoading(true)
+    const { error, data } = await login(email, password)
+    if (!error) {
+      onloginUser(data)
+      navigate('/')
     }
+    setLoading(false)
   }
 
   return (
@@ -52,12 +46,12 @@ function Index () {
       </div>
       <div className='rightSection'>
           <p className='intro'>Selamat Datang</p>
-          <div className='input-login'>
-              <input type="email" placeholder='Masukkan Email...' id="email" value={email} onChange={setEmail} required />
-              <input type="password" placeholder='Masukkan Password...' id="password" value={password} onChange={setPassword} required />
-              {!showPassword ? <FiEyeOff onClick={ () => showPass() } className='iconPass'/> : <FiEye onClick={() => showPass()} className='iconPass'/>}
-          </div>
-          <button className='btn-masuk' onClick={ () => login() }>MASUK</button>
+          <form onSubmit={loginUser} className='input-login'>
+            <input type="email" placeholder='Masukkan Email...' id="email" value={email} onChange={setEmail} required />
+            <input type="password" minLength={6} placeholder='Masukkan Password...' id="password" value={password} onChange={setPassword} required />
+            {!showPassword ? <FiEyeOff onClick={ () => showPass() } className='iconPass'/> : <FiEye onClick={() => showPass()} className='iconPass'/>}
+            <button type='submit' className='btn-masuk'>MASUK</button>
+          </form>
           <div className="text-center">
               <p>Belum punya akun? daftar sekarang <Link to="/registerUser"><u>di sini</u></Link></p>
               <p>Mau jadi mitra? gabung sekarang <Link to="/loginMitra"><u>di sini</u></Link></p>
