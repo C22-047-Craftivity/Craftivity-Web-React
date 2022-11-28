@@ -3,15 +3,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import useInput from '../../hooks/useInput'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import './style.css'
-import { login } from '../../confiq/firebase'
+import { login, resetPassword } from '../../confiq/firebase'
 import loginVectorUser from '../../assets/LoginVektorUser.png'
 import Loading from '../../components/Loading'
+import ResetPasswordPage from '../../components/ResetPassword'
 
 function Index ({ onloginUser }) {
   const [email, setEmail] = useInput('')
   const [password, setPassword] = useInput('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [resetPass, setResetPass] = useState(false)
   const navigate = useNavigate()
 
   function showPass () {
@@ -36,9 +38,21 @@ function Index ({ onloginUser }) {
     setLoading(false)
   }
 
+  async function lupaPassword (email) {
+    setLoading(true)
+    await resetPassword(email)
+    setLoading(false)
+    setResetPass(false)
+  }
+
+  function hiddenResetPage () {
+    setResetPass(false)
+  }
+
   return (
     <div className='login'>
       <Loading visible={loading} />
+      <ResetPasswordPage lupaPassword={lupaPassword} visible={resetPass} hidden={() => hiddenResetPage} />
       <div className='leftSection'>
           <img src={loginVectorUser} alt='' height={500} width={450} />
           <h3>Selamat Datang</h3>
@@ -50,6 +64,7 @@ function Index ({ onloginUser }) {
             <input type="email" placeholder='Masukkan Email...' id="email" value={email} onChange={setEmail} required />
             <input type="password" minLength={6} placeholder='Masukkan Password...' id="password" value={password} onChange={setPassword} required />
             {!showPassword ? <FiEyeOff onClick={ () => showPass() } className='iconPass'/> : <FiEye onClick={() => showPass()} className='iconPass'/>}
+            <p className='lupaPass'>Lupa password? <button onClick={() => setResetPass(true)}>Klik disini</button></p>
             <button type='submit' className='btn-masuk'>MASUK</button>
           </form>
           <div className="text-center">

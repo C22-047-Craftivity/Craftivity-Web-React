@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import useInput from '../../hooks/useInput'
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import './style.css'
-import { login } from '../../confiq/firebase'
+import { login, resetPassword } from '../../confiq/firebase'
 import loginVectorMitra from '../../assets/LoginVektorMitra.png'
 import Loading from '../../components/Loading'
+import ResetPasswordPage from '../../components/ResetPassword'
 
 function Index ({ onLoginMitra }) {
   const [email, setEmail] = useInput('')
@@ -13,6 +14,7 @@ function Index ({ onLoginMitra }) {
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
+  const [resetPass, setResetPass] = useState(false)
 
   function showPass () {
     const password = document.getElementById('password')
@@ -36,9 +38,21 @@ function Index ({ onLoginMitra }) {
     setLoading(false)
   }
 
+  async function lupaPassword (email) {
+    setLoading(true)
+    await resetPassword(email)
+    setLoading(false)
+    setResetPass(false)
+  }
+
+  function hiddenResetPage () {
+    setResetPass(false)
+  }
+
   return (
     <div className='login'>
       <Loading visible={loading} />
+      <ResetPasswordPage lupaPassword={lupaPassword} visible={resetPass} hidden={() => hiddenResetPage} />
       <div className='leftSection'>
           <img src={loginVectorMitra} alt='' height={450} width={450} className='mt-4' />
           <h3>Selamat Datang</h3>
@@ -50,6 +64,7 @@ function Index ({ onLoginMitra }) {
             <input type="email" placeholder='Masukkan Email...' id="email" value={email} onChange={setEmail} required />
             <input minLength={6} type="password" placeholder='Masukkan Password...' id="password" value={password} onChange={setPassword} required />
             {!showPassword ? <FiEyeOff onClick={ () => showPass() } className='iconPass'/> : <FiEye onClick={() => showPass()} className='iconPass'/>}
+            <p className='lupaPass'>Lupa password? <button type='button' onClick={() => setResetPass(true)}>Klik disini</button></p>
             <button type='submit' className='btn-masuk'>MASUK</button>
           </form>
           <div className="text-center">
