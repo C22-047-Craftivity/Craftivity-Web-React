@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-import { getDatabase, ref, set } from 'firebase/database'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth'
+import { getDatabase, ref, set, child, get } from 'firebase/database'
 // import 'firebase/firestore'
 import Swal from 'sweetalert2'
 
@@ -26,15 +26,7 @@ export function registerUser (nama, email, password) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
         saveUserData(res.user.uid, nama, email)
-      })
-      .then(() => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          text: 'Akun berhasil di buat',
-          showConfirmButton: false,
-          timer: 1500
-        })
+        return { error: false }
       })
       .catch((error) => {
         Swal.fire({
@@ -45,6 +37,7 @@ export function registerUser (nama, email, password) {
           showConfirmButton: false,
           timer: 1500
         })
+        return { error: true }
       })
   )
 }
@@ -63,15 +56,7 @@ export function registerMitra (namaToko, email, password) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
         saveMitraData(res.user.uid, namaToko, email)
-      })
-      .then(() => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          text: 'Toko berhasil di buat',
-          showConfirmButton: false,
-          timer: 1500
-        })
+        return { error: false }
       })
       .catch((error) => {
         Swal.fire({
@@ -82,6 +67,7 @@ export function registerMitra (namaToko, email, password) {
           showConfirmButton: false,
           timer: 1500
         })
+        return { error: true }
       })
   )
 }
@@ -93,4 +79,87 @@ function saveMitraData (id, namaToko, email, imageUrl = 'https://firebasestorage
     email,
     profile_picture: imageUrl
   })
+}
+
+export function login (email, password) {
+  return (
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        const user = auth.currentUser
+        return { error: false, data: user }
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: error.code,
+          text: error.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return { error: true, data: null }
+      })
+  )
+}
+
+export function resetPassword (email) {
+  return (
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        Swal.fire('Berhasil', 'Silahkan cek email Anda!', 'success')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  )
+}
+
+export function logout () {
+  return (
+    signOut(auth)
+      .then(() => {
+        return { error: false }
+      })
+      .catch(() => {
+        return { error: true }
+      })
+  )
+}
+
+export function getMitra () {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/Mitra'))
+      .then((snapshot) => {
+        const data = []
+        snapshot.forEach((childSnapshot) => {
+          const childKey = childSnapshot.key
+          const childData = childSnapshot.val()
+          data.push(childData)
+        })
+        return { DataMitra: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  )
+}
+
+export function getUser () {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/users'))
+      .then((snapshot) => {
+        const data = []
+        snapshot.forEach((childSnapshot) => {
+          const childKey = childSnapshot.key
+          const childData = childSnapshot.val()
+          data.push(childData)
+        })
+        return { DataUser: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  )
 }
