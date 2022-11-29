@@ -1,8 +1,8 @@
-import "../CardItem/style.css";
-import StarWidget from "../Star"
-import { Link } from 'react-router-dom';
+import '../CardItem/style.css'
+import StarWidget from '../Star'
+import { Link } from 'react-router-dom'
 
-function PopulerItem({ populer }) {
+function PopulerItem ({ populer }) {
   return (
     <div className="col-lg-3 mb-4">
       <div className="card-product">
@@ -21,7 +21,7 @@ function PopulerItem({ populer }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default PopulerItem;
+export default PopulerItem

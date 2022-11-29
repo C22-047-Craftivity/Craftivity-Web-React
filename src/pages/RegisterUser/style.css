@@ -1,0 +1,207 @@
+.register{
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    padding: 35px;
+    justify-content: space-around;
+}
+
+.leftSection{
+    background-image: linear-gradient(to bottom right, rgba(253, 178, 71, 0.9) 30%, rgba(183, 126, 251, 0.9));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 30px;
+    width: 50%;
+}
+
+.leftSection h3{
+    margin-bottom: 20px;
+}
+.leftSection p{
+    width: 80%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.rightSection{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.intro{
+    color: black;
+    font-weight: bold;
+    font-size: 48px;
+    padding: 5px 10px;
+    border-bottom: 4px solid black;
+    text-align: center;
+}
+
+.input-register{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-register input{
+    margin-bottom: 25px;
+    border-radius: 50px;
+    padding: 10px 15px;
+    width: 100%;
+    border: 1px solid #AF7AEE;
+    box-shadow: 0px 0px 5px #bdbdbd;
+}
+
+input:focus{
+    outline: none;
+}
+
+input::-webkit-input-placeholder{
+    color: black;
+    font-weight: 600;
+}
+
+input::-moz-input-placeholder{
+    color: black;
+    font-weight: bold;
+}
+
+input::-ms-input-placeholder{
+    color: black;
+    font-weight: bold;
+}
+
+.input-passwordRegister{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.input-passwordRegister div{
+    position: relative;
+}
+
+.iconPassUser, .iconPassRepeat{
+    position:absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 30px;
+    color: #AF7AEE;
+    background-color: white;
+}
+
+.iconPassUser:hover{
+    cursor: pointer;
+}
+
+.btn-daftar {
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    font-size: 24px;
+    padding: 5px;
+    margin-top: 40px;
+    background-color: #FA984D;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px #FA984D;
+    cursor: pointer;
+}
+
+.btn-daftar:hover{
+    background-color: #fa984dd9;
+}
+
+.btn-daftar:active{
+    transform: scale(0.95);
+}
+
+u{
+    color: #9F75F2;
+}
+
+@media screen and (max-width:1200px) {
+    .leftSection{
+        width: 40%;
+    }
+
+    .leftSection img{
+        width: 350px;
+        height: 450px;
+    }
+    
+    .rightSection{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:850px) {
+    .leftSection{
+        width: 100%;
+    }
+
+    .intro{
+        display: none;
+    }
+    
+    .rightSection{
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.4);
+        padding: 20px;
+        border-radius: 20px;
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);;
+    }
+
+    .btn-daftar{
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width:430px) {
+    .register{
+        justify-content: space-between;
+        padding: 0;
+    }
+
+    .leftSection{
+        width: 100%;
+        border-radius: 0px;
+    }
+
+    .intro{
+        display: none;
+    }
+
+    .input-passwordRegister{
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    
+    .rightSection{
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.4);
+        padding: 20px;
+        border-radius: 20px;
+        width: 80%;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -20%);;
+    }
+
+    .btn-daftar{
+        margin-bottom: 30px;
+    }
+
+    .rightSection p{
+        font-size: 10px;
+    }
+}
