@@ -44,9 +44,18 @@ function Index () {
     event.preventDefault()
     if (password === passwordRepeat) {
       setLoading(true)
-      await registerUser(namaUser, email, password)
+      const { error } = await registerUser(namaUser, email, password)
+      if (!error) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          text: 'Akun berhasil di buat',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        navigate('/')
+      }
       setLoading(false)
-      navigate('/')
     } else {
       Swal.fire('Gagal', 'Password tidak sesuai', 'error')
     }
