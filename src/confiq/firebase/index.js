@@ -163,3 +163,17 @@ export function getUser () {
       })
   )
 }
+
+export function getUserById (userId) {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/users/' + userId))
+      .then((snapshot) => {
+        const data = snapshot.val()
+        return { user: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  )
+}

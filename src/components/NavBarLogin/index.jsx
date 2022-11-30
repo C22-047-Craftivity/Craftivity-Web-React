@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import '../NavBarLogin/navbar-login-style.css'
 import FavoriteIcon from '../../assets/Favorite.svg'
 import CartIcon from '../../assets/Cart.svg'
+import { getUserById, logout } from '../../confiq/firebase'
+import CONFIQ from '../../confiq/confiq'
 
 function NavBarLanding () {
+  const [user, setUser] = useState([])
+
+  useEffect(() => {
+    async function getDataUserById () {
+      const { user } = await getUserById(localStorage.getItem(CONFIQ.authUser))
+      setUser(user)
+      console.log(user)
+    }
+    getDataUserById()
+  }, [])
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-custom">
       <Link to="/" className="navbar-brand p-3 font-weight-bold">
@@ -57,19 +69,14 @@ function NavBarLanding () {
               data-toggle="dropdown"
               aria-expanded="false"
             >
-                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" className='profile-image-button'/>
+                <img src={user.profile_picture} alt="" className='profile-image-button'/>
             </a>
             <div class="dropdown-menu dropdown-menu-right mt-3">
-              <a class="dropdown-item" href="#">
-                Action
-              </a>
-              <a class="dropdown-item" href="#">
-                Another action
-              </a>
+              <Link to="/keranjang" className="dropdown-item">
+                Atur Profile
+              </Link>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                Something else here
-              </a>
+              <button onClick={logout}>Logout</button>
             </div>
           </li>
         </ul>

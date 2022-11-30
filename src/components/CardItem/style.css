@@ -1,13 +1,13 @@
 .card-product{
     background-color: white;
-    border-radius: 34px;
+    border-radius: 12px;
     border: 2px solid #FA984D;
     padding: 14px;
     transition: 0.3s;
 }
 
 .card-product .image-product img{
-    border-radius: 34px;
+    border-radius: 12px;
     width: 100%;
     height: 170px;
     object-fit: cover;
