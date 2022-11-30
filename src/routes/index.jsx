@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import CONFIQ from '../confiq/confiq'
-import { getMitra, getUser, logout } from '../confiq/firebase'
+import { getAllMitra, getAllUser, logout } from '../confiq/firebase'
 import LandingPage from '../pages/Landing'
 import LoginUserPage from '../pages/LoginUser'
 import RegisterUserPage from '../pages/RegisterUser'
@@ -9,6 +9,8 @@ import LoginMitraPage from '../pages/LoginMitra'
 import RegisterMitraPage from '../pages/RegisterMitra'
 import DetailPage from '../pages/Detail'
 import KeranjangPage from '../pages/Keranjang'
+import HeaderAdmin from '../components/AdminHeader'
+import MenuAdmin from '../components/AdminMenu'
 import Swal from 'sweetalert2'
 
 function Index () {
@@ -19,8 +21,8 @@ function Index () {
 
   useEffect(() => {
     async function getDataAllUser () {
-      const { DataMitra } = await getMitra()
-      const { DataUser } = await getUser()
+      const { DataMitra } = await getAllMitra()
+      const { DataUser } = await getAllUser()
       setDataMitra(DataMitra)
       setDataUser(DataUser)
     }
@@ -36,7 +38,7 @@ function Index () {
     }
     if (authMitra === null) {
       Swal.fire('Akses ditolak', 'akun tidak memiliki akses ke halaman ini!', 'error')
-      await logout()
+      await onLogout()
     }
   }
 
@@ -50,7 +52,16 @@ function Index () {
     }
     if (authUser === null) {
       Swal.fire('Akses ditolak', 'akun tidak memiliki akses ke halaman ini!', 'error')
-      await logout()
+      await onLogout()
+    }
+  }
+
+  async function onLogout () {
+    const { error } = await logout()
+    if (!error) {
+      localStorage.clear()
+      setAuthMitra(null)
+      setAuthUser(null)
     }
   }
 
@@ -67,9 +78,29 @@ function Index () {
 
   if (authMitra !== null) {
     return (
-      <Routes>
-        <Route path="/*" element={<DetailPage />} />
-      </Routes>
+      <>
+       <header>
+        <HeaderAdmin />
+       </header>
+       <main>
+        <div className='container'>
+          <div className='row mt-5'>
+            <div className='col-sm-3 col-2'>
+              <MenuAdmin onLogout={onLogout} />
+            </div>
+            <div className='col-sm-9 col-10'>
+              <Routes>
+                <Route path="/" element={<DetailPage />} />
+                <Route path="/profil" element={<DetailPage />} />
+                <Route path="/list-barang" element={<DetailPage />} />
+                <Route path="/forum" element={<DetailPage />} />
+              </Routes>
+            </div>
+          </div>
+        </div>
+       </main>
+       <footer></footer>
+      </>
     )
   }
 

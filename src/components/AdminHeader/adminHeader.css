@@ -1,0 +1,56 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+    scroll-behavior: smooth;
+}
+
+.headerAdmin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #FDB248;
+}
+
+.headerAdmin img {
+    height: 100px;
+    width: 180px;
+}
+
+.headerAdmin h1 {
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.akunProfil {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.akunProfil img {
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.akunProfil p {
+    margin: 0px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+@media screen and (max-width:575px) {
+    .headerAdmin h1{
+        display: none;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .headerAdmin h1{
+        font-size: 30px;
+    }
+}

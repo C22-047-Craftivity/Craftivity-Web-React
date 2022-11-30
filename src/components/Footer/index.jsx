@@ -1,4 +1,4 @@
-import '../Footer/style.css'
+import '../Footer/footer.css'
 import { FaFacebookF, FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { BiSearchAlt } from 'react-icons/bi'

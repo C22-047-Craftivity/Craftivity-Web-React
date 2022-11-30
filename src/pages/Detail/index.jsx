@@ -13,7 +13,7 @@ import { ButtonBeli, ButtonKeranjang } from '../../components/Button'
 import StarWidget from '../../components/Star'
 import ReviewItem from '../../components/Review/review-item'
 
-import '../Detail/style.css'
+import '../Detail/detail.css'
 
 function Index () {
   const data = populer[0]
