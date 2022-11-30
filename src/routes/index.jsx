@@ -9,6 +9,7 @@ import LoginMitraPage from '../pages/LoginMitra'
 import RegisterMitraPage from '../pages/RegisterMitra'
 import DetailPage from '../pages/Detail'
 import KeranjangPage from '../pages/Keranjang'
+import HomePage from '../pages/HomePage'
 import Swal from 'sweetalert2'
 
 function Index () {
@@ -75,7 +76,7 @@ function Index () {
 
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginUserPage />} />
       <Route path="/detail/:id" element={<DetailPage />} />
       <Route path="/keranjang" element={<KeranjangPage/>}/>
