@@ -1,4 +1,4 @@
-import '../Button/style.css'
+import '../Button/button.css'
 
 function ButtonBeli () {
   return (

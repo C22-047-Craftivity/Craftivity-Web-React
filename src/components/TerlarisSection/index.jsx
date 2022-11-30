@@ -1,5 +1,5 @@
 import TerlarisItem from './terlaris-item'
-import '../TerlarisSection/style.css'
+import '../TerlarisSection/terlarisSection.css'
 function Index ({ terlaris }) {
   return (
     <div className="container-terlaris">

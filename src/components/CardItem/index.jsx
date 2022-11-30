@@ -1,4 +1,4 @@
-import '../CardItem/style.css'
+import '../CardItem/cardItem.css'
 import StarWidget from '../Star'
 import { Link } from 'react-router-dom'
 

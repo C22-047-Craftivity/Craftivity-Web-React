@@ -1,5 +1,5 @@
 import KategoriItem from './kategori-item'
-import '../KategoriSection/style.css'
+import '../KategoriSection/kategoriSection.css'
 
 function Index ({ categories }) {
   return (

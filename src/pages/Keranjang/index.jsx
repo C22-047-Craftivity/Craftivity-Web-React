@@ -1,6 +1,6 @@
 import NavBarLanding from '../../components/NavBarLanding'
 import Footer from '../../components/Footer'
-import '../Keranjang/style.css'
+import '../Keranjang/keranjangPage.css'
 import { ButtonCari, ButtonCheckout } from '../../components/Button'
 import KeranjangItem from '../../components/Keranjang'
 import keranjang from '../../utils/data'
