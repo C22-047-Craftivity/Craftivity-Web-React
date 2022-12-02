@@ -9,8 +9,11 @@ import LoginMitraPage from '../pages/LoginMitra'
 import RegisterMitraPage from '../pages/RegisterMitra'
 import DetailPage from '../pages/Detail'
 import KeranjangPage from '../pages/Keranjang'
-import HeaderAdmin from '../components/AdminHeader'
-import MenuAdmin from '../components/AdminMenu'
+import HeaderMitra from '../components/MitraHeader'
+import MenuMitra from '../components/MitraMenu'
+import ProfilMitra from '../pages/ProfilMitra'
+import ListBarangMitra from '../pages/ListBarangMitra'
+import FooterMitra from '../components/MitraFooter'
 import Swal from 'sweetalert2'
 
 function Index () {
@@ -80,26 +83,26 @@ function Index () {
     return (
       <>
        <header>
-        <HeaderAdmin />
+        <HeaderMitra />
        </header>
        <main>
         <div className='container'>
-          <div className='row mt-5'>
+          <div className='row mt-5 mb-5'>
             <div className='col-sm-3 col-2'>
-              <MenuAdmin onLogout={onLogout} />
+              <MenuMitra onLogout={onLogout} />
             </div>
             <div className='col-sm-9 col-10'>
               <Routes>
                 <Route path="/" element={<DetailPage />} />
-                <Route path="/profil" element={<DetailPage />} />
-                <Route path="/list-barang" element={<DetailPage />} />
+                <Route path="/profil" element={<ProfilMitra />} />
+                <Route path="/list-barang" element={<ListBarangMitra />} />
                 <Route path="/forum" element={<DetailPage />} />
               </Routes>
             </div>
           </div>
         </div>
        </main>
-       <footer></footer>
+       <FooterMitra />
       </>
     )
   }
