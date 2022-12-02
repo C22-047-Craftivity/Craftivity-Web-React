@@ -34,7 +34,7 @@ function Index () {
 
   async function onLoginMitra (data) {
     for (let i = 0; i < dataMitra.length; i++) {
-      if (dataMitra[i].id === data.uid) {
+      if (dataMitra[i].idMitra === data.uid) {
         localStorage.setItem(CONFIQ.authMitra, data.uid)
         return setAuthMitra(data.uid)
       }
@@ -46,9 +46,8 @@ function Index () {
   }
 
   async function onLoginUser (data) {
-    console.log(dataUser)
     for (let i = 0; i < dataUser.length; i++) {
-      if (dataUser[i].id === data.uid) {
+      if (dataUser[i].idUser === data.uid) {
         localStorage.setItem(CONFIQ.authUser, data.uid)
         return setAuthUser(data.uid)
       }

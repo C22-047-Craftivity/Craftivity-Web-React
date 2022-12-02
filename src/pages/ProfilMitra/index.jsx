@@ -68,7 +68,7 @@ export default function Index () {
           <button type='button' className='editPoto' onClick={() => avatar.current.click()}><AiFillCamera /></button>
         </div>
         <div className='profilMitra-dataUtama_akun'>
-          <p>Id: {mitra.id}</p>
+          <p>Id: {mitra.idMitra}</p>
           <p>Email: {mitra.email}</p>
           <p>Bergabung sejak {mitra.bergabung}</p>
         </div>
