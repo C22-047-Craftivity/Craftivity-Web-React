@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { MdDashboardCustomize, MdForum } from 'react-icons/md'
 import { FaUserEdit, FaBoxes, FaSignOutAlt } from 'react-icons/fa'
 import Swal from 'sweetalert2'
-import './adminMenu.css'
+import './mitraMenu.css'
 
 export default function Index ({ onLogout }) {
   function logout () {
@@ -21,7 +21,7 @@ export default function Index ({ onLogout }) {
       })
   }
   return (
-    <div className='menuAdmin'>
+    <div className='menuMitra'>
         <NavLink to='/' className={({ isActive }) => 'btn-menu' + (!isActive ? '' : ' active')}><MdDashboardCustomize /><span> Dashboard</span></NavLink>
         <NavLink to='/profil' className={({ isActive }) => 'btn-menu' + (!isActive ? '' : ' active')}><FaUserEdit /><span> Profil</span></NavLink>
         <NavLink to='/list-barang' className={({ isActive }) => 'btn-menu' + (!isActive ? '' : ' active')}><FaBoxes /><span> Barang</span></NavLink>

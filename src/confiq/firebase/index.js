@@ -1,8 +1,10 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth'
 import { getDatabase, ref, set, child, get } from 'firebase/database'
-// import 'firebase/firestore'
+import { getStorage, ref as refImg, uploadBytes, getDownloadURL } from 'firebase/storage'
 import Swal from 'sweetalert2'
+import moment from 'moment'
+import { FiFile } from 'react-icons/fi'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDqpZ9A-ACeB9rXKiA59590yAYmEVyNsuo',
@@ -20,6 +22,8 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase(app)
+// Initialize Storage and get a reference to the service
+const storage = getStorage()
 
 export function registerUser (nama, email, password) {
   return (
@@ -42,11 +46,12 @@ export function registerUser (nama, email, password) {
   )
 }
 
-function saveUserData (id, nama, email, imageUrl = 'https://firebasestorage.googleapis.com/v0/b/craftivity-batch3.appspot.com/o/profilTemplate.jpg?alt=media&token=e199f8a1-f33f-4c85-8b51-e07641ef7194') {
+function saveUserData (id, nama, email, noHp = '', imageUrl = 'https://firebasestorage.googleapis.com/v0/b/craftivity-batch3.appspot.com/o/profilTemplate.jpg?alt=media&token=e199f8a1-f33f-4c85-8b51-e07641ef7194') {
   set(ref(database, 'users/' + id), {
     id,
     username: nama,
     email,
+    noHp,
     profile_picture: imageUrl
   })
 }
@@ -55,7 +60,7 @@ export function registerMitra (namaToko, email, password) {
   return (
     createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        saveMitraData(res.user.uid, namaToko, email)
+        saveMitraData({ id: res.user.uid, namaToko, email })
         return { error: false }
       })
       .catch((error) => {
@@ -72,12 +77,14 @@ export function registerMitra (namaToko, email, password) {
   )
 }
 
-function saveMitraData (id, namaToko, email, imageUrl = 'https://firebasestorage.googleapis.com/v0/b/craftivity-batch3.appspot.com/o/storeTemplate.jpg?alt=media&token=23c3dce9-b841-405f-b166-1fa4a2101b77') {
+export function saveMitraData ({ id, namaToko, email, bergabung = moment().format('DD MMM YYYY'), kota = '', profilePicture = 'https://firebasestorage.googleapis.com/v0/b/craftivity-batch3.appspot.com/o/storeTemplate.jpg?alt=media&token=23c3dce9-b841-405f-b166-1fa4a2101b77' }) {
   set(ref(database, 'Mitra/' + id), {
     id,
-    nameStore: namaToko,
+    namaToko,
     email,
-    profile_picture: imageUrl
+    kota,
+    bergabung,
+    profilePicture
   })
 }
 
@@ -174,6 +181,28 @@ export function getAllUser () {
       })
       .catch((error) => {
         console.error(error)
+      })
+  )
+}
+
+export function uploadProfilMitra (file, data) {
+  const imagePath = `profilMitra/${+new Date()}${file.name}`
+  const storageRef = refImg(storage, imagePath)
+  return (
+    uploadBytes(storageRef, file)
+      .then(() => {
+        getDownloadURL(refImg(storage, imagePath))
+          .then((url) => {
+            saveMitraData({ ...data, profilePicture: url })
+          })
+          .catch((error) => {
+            Swal.fire(error.message)
+          })
+      })
+      .then(() => {
+        return { error: false }
+      }).catch((error) => {
+        Swal.fire(error.message)
       })
   )
 }
