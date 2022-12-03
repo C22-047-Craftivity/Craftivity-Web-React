@@ -1,0 +1,42 @@
+.card-user-menu{
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-user-menu{
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: black;
+    font-weight: 600;
+    transition: 0.2s;
+    width: 100%;
+    text-decoration: none;
+    background-color: white;
+}
+
+.btn-link:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #FA984D;
+}
+
+.btn-user-menu:hover{
+    background-color: #FA984D;
+    color: white;
+}
+
+.btn-user-menu .selected{
+    background-color: #FA984D;
+    color: white;
+}
+
+.btn-keluar{
+    color: white;
+    background-color: #F08181;
+}
+
+.btn-keluar:hover{
+    color: white;
+    background-color: #d44747;
+}
+

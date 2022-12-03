@@ -1,5 +1,5 @@
 import CardItem from '../CardItem'
-import '../PopulerSection/style.css'
+import '../PopulerSection/populerSection.css'
 function Index ({ populer }) {
   return (
     <div className="container-populer">

@@ -9,10 +9,10 @@ import PopulerSection from '../../components/PopulerSection'
 import populer from '../../components/PopulerSection/populer'
 import Footer from '../../components/Footer'
 
-function Index () {
+function Index ({ onLogout }) {
   return (
         <div>
-            <NavbarLogin/>
+            <NavbarLogin logoutHandler={onLogout}/>
             <div className="container mt-4">
                 <section className="mb-5">
                     <CarouselSlider images={images}/>

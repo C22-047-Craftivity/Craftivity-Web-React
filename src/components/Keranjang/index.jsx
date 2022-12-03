@@ -1,7 +1,7 @@
 import CountDetail from '../Detail/count-detail'
 import { useState } from 'react'
 import { ButtonHapus } from '../Button'
-import '../Keranjang/style.css'
+import '../Keranjang/keranjang.css'
 
 function Index ({ keranjang }) {
   const [jumlah, setJumlah] = useState(1)

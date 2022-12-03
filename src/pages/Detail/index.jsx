@@ -1,5 +1,6 @@
 // import { useParams, useNavigate } from 'react-router-dom';
-import NavBarLanding from '../../components/NavBarLanding'
+// import NavBarLanding from '../../components/NavBarLanding'
+import NavBarLogin from '../../components/NavBarLogin'
 import Footer from '../../components/Footer'
 import populer from '../../components/PopulerSection/populer'
 import { useEffect, useState } from 'react'
@@ -13,9 +14,9 @@ import { ButtonBeli, ButtonKeranjang } from '../../components/Button'
 import StarWidget from '../../components/Star'
 import ReviewItem from '../../components/Review/review-item'
 
-import '../Detail/style.css'
+import '../Detail/detail.css'
 
-function Index () {
+function Index ({ onLogout }) {
   const data = populer[0]
   const [jumlah, setJumlah] = useState(1)
   const [totalHarga, setTotal] = useState(data.harga)
@@ -30,7 +31,7 @@ function Index () {
 
   return (
     <div>
-      <NavBarLanding />
+      <NavBarLogin logoutHandler={onLogout}/>
       <div className="container mt-4 mb-5">
         <h4>{data.name}</h4>
         <div className="row mb-5">

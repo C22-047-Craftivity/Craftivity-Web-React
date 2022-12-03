@@ -109,7 +109,7 @@ export function resetPassword (email) {
         Swal.fire('Berhasil', 'Silahkan cek email Anda!', 'success')
       })
       .catch((error) => {
-        console.log(error)
+        Swal.fire(error.code, error.message, 'error')
       })
   )
 }
@@ -126,7 +126,7 @@ export function logout () {
   )
 }
 
-export function getMitra () {
+export function getAllMitra () {
   const dbref = ref(database)
   return (
     get(child(dbref, '/Mitra'))
@@ -145,7 +145,21 @@ export function getMitra () {
   )
 }
 
-export function getUser () {
+export function getMitra (mitraId) {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/Mitra/' + mitraId))
+      .then((snapshot) => {
+        const data = snapshot.val()
+        return { Mitra: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  )
+}
+
+export function getAllUser () {
   const dbref = ref(database)
   return (
     get(child(dbref, '/users'))

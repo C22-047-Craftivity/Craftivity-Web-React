@@ -6,8 +6,9 @@ import FavoriteIcon from '../../assets/Favorite.svg'
 import CartIcon from '../../assets/Cart.svg'
 import { getUserById, logout } from '../../confiq/firebase'
 import CONFIQ from '../../confiq/confiq'
+import Swal from 'sweetalert2'
 
-function NavBarLanding () {
+function NavBarLanding ({ logoutHandler }) {
   const [user, setUser] = useState([])
 
   useEffect(() => {
@@ -18,6 +19,22 @@ function NavBarLanding () {
     }
     getDataUserById()
   }, [])
+
+  function logout () {
+    Swal.fire({
+      title: 'Apakah Anda yakin ingin keluar?',
+      showDenyButton: true,
+      confirmButtonText: 'Batal',
+      denyButtonText: 'Keluar',
+      icon: 'warning'
+    })
+      .then((result) => {
+        if (result.isDenied) {
+          logoutHandler()
+        }
+      })
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-custom">
       <Link to="/" className="navbar-brand p-3 font-weight-bold">
@@ -62,7 +79,7 @@ function NavBarLanding () {
               <img src={CartIcon} alt="" />
             </Link>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown mr-3">
             <a
               href="#"
               role="button"
@@ -72,11 +89,13 @@ function NavBarLanding () {
                 <img src={user.profile_picture} alt="" className='profile-image-button'/>
             </a>
             <div class="dropdown-menu dropdown-menu-right mt-3">
-              <Link to="/keranjang" className="dropdown-item">
+              <Link to="/profile" className="dropdown-item">
                 Atur Profile
               </Link>
               <div class="dropdown-divider"></div>
-              <button onClick={logout}>Logout</button>
+              <Link className="dropdown-item" onClick={logout}>
+                <span className='button-logout'>Logout</span>
+              </Link>
             </div>
           </li>
         </ul>

@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.css'
+import './loading.css'
 
 export default function Loading ({ visible = true }) {
   return (
