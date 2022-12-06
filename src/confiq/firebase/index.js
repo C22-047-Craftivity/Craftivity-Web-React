@@ -220,6 +220,70 @@ export function uploadProfilMitra (file, data) {
         return { error: false }
       }).catch((error) => {
         Swal.fire(error.message)
+        return { error: true }
+      })
+  )
+}
+
+export function saveProdukTemp ({ idBrg, idMitra, nama, gambarBrg, deskripsi, harga, rating, terjual, kategori, reviews = '' }) {
+  set(ref(database, 'Produk/' + idBrg), {
+    idBrg,
+    idMitra,
+    nama,
+    gambarBrg,
+    deskripsi,
+    harga,
+    rating,
+    terjual,
+    kategori,
+    reviews
+  })
+}
+
+export function saveProduk (file, data) {
+  const imagePath = `produk/${+new Date()}`
+  const storageRef = refImg(storage, imagePath)
+  return (
+    uploadBytes(storageRef, file)
+      .then(() => {
+        getDownloadURL(refImg(storage, imagePath))
+          .then((url) => {
+            saveProdukTemp({ ...data, gambarBrg: url })
+          })
+          .catch((error) => {
+            Swal.fire(error.message)
+          })
+      })
+      .then(() => {
+        return { error: false }
+      })
+      .catch((error) => {
+        Swal.fire(error.message)
+        return { error: true }
+      })
+  )
+}
+
+export function getAllProduk () {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/Produk'))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = []
+          snapshot.forEach((childSnapshot) => {
+            const childKey = childSnapshot.key
+            const childData = childSnapshot.val()
+            data.push(childData)
+          })
+          return { error: false, AllProduk: data }
+        } else {
+          return { error: false, AllProduk: null }
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+        return { error: true, AllProduk: null }
       })
   )
 }
