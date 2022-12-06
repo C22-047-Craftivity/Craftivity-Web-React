@@ -4,7 +4,7 @@ html, body {
     scroll-behavior: smooth;
 }
 
-.headerAdmin {
+.headerMitra {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,12 +12,12 @@ html, body {
     background-color: #FDB248;
 }
 
-.headerAdmin img {
+.headerMitra img {
     height: 100px;
     width: 180px;
 }
 
-.headerAdmin h1 {
+.headerMitra h1 {
     color: white;
     font-size: 50px;
     font-weight: bold;
@@ -44,13 +44,13 @@ html, body {
 }
 
 @media screen and (max-width:575px) {
-    .headerAdmin h1{
+    .headerMitra h1{
         display: none;
     }
 }
 
 @media screen and (max-width:650px) {
-    .headerAdmin h1{
+    .headerMitra h1{
         font-size: 30px;
     }
 }

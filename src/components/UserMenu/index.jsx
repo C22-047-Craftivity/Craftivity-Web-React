@@ -3,7 +3,7 @@ import '../UserMenu/user-menu-style.css'
 import { MdDashboard, MdFavorite, MdLocationOn, MdOutlineModeEdit, MdBookmark, MdVpnKey, MdLogout } from 'react-icons/md'
 import Swal from 'sweetalert2'
 
-function Index ({ logoutHandler }) {
+function Index ({ logoutHandler, url }) {
   function logout () {
     Swal.fire({
       title: 'Apakah Anda yakin ingin keluar?',
@@ -21,25 +21,22 @@ function Index ({ logoutHandler }) {
   return (
     <div className="card-user-menu">
       <div className="card-body">
-        <NavLink to="/profile" style={{ textDecoration: 'none' }} className="btn btn-link text-left text-dark w-100">
-          <MdDashboard className='mr-3'/>Dashboard
-        </NavLink>
-        <NavLink to="/edit_profile" style={{ textDecoration: 'none' }} className="btn btn-link text-left text-dark w-100">
+        <NavLink to='edit_profile' style={{ textDecoration: 'none' }} className={({ isActive }) => 'btn-menu-user' + (!isActive ? '' : ' active')}>
           <MdOutlineModeEdit className='mr-3'/>Edit Profile
         </NavLink>
-        <NavLink to="/alamat" style={{ textDecoration: 'none' }} className="btn btn-link text-left text-dark w-100">
+        <NavLink to="alamat" style={{ textDecoration: 'none' }} className={({ isActive }) => 'btn-menu-user' + (!isActive ? '' : ' active')}>
           <MdLocationOn className='mr-3'/>Atur Alamat
         </NavLink>
-        <NavLink to="/pesanan" style={{ textDecoration: 'none' }} className="btn btn-link text-left text-dark w-100">
+        <NavLink to="pesanan" style={{ textDecoration: 'none' }} className={({ isActive }) => 'btn-menu-user' + (!isActive ? '' : ' active')}>
           <MdBookmark className='mr-3'/>Lihat Pesanan
         </NavLink>
-        <NavLink to="/list_favorite" style={{ textDecoration: 'none' }} className="btn btn-link text-left text-dark w-100">
+        <NavLink to="list_favorite" style={{ textDecoration: 'none' }} className={({ isActive }) => 'btn-menu-user' + (!isActive ? '' : ' active')}>
           <MdFavorite className='mr-3'/>Favorite Kamu
         </NavLink>
-        <NavLink to="/ubah_password" style={{ textDecoration: 'none' }} className="btn btn-link text-left text-dark w-100">
+        <NavLink to="ubah_password" style={{ textDecoration: 'none' }} className={({ isActive }) => 'btn-menu-user' + (!isActive ? '' : ' active')}>
           <MdVpnKey className='mr-3'/>Ubah Password
         </NavLink>
-        <button className='btn btn-keluar text-left w-100' onClick={logout}><MdLogout className='mr-3'/>Keluar</button>
+        <button className='btn-keluar' onClick={logout}><MdLogout className='mr-3'/>Keluar</button>
       </div>
     </div>
   )

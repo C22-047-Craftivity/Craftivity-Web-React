@@ -8,7 +8,7 @@ import { getUserById, logout } from '../../confiq/firebase'
 import CONFIQ from '../../confiq/confiq'
 import Swal from 'sweetalert2'
 
-function NavBarLanding ({ logoutHandler }) {
+function NavBarLogin ({ logoutHandler }) {
   const [user, setUser] = useState([])
 
   useEffect(() => {
@@ -86,10 +86,10 @@ function NavBarLanding ({ logoutHandler }) {
               data-toggle="dropdown"
               aria-expanded="false"
             >
-                <img src={user.profile_picture} alt="" className='profile-image-button'/>
+              <img src={user.profilePicture} alt="" className='profile-image-button'/>
             </a>
             <div class="dropdown-menu dropdown-menu-right mt-3">
-              <Link to="/profile" className="dropdown-item">
+              <Link to="/profile/edit_profile" className="dropdown-item">
                 Atur Profile
               </Link>
               <div class="dropdown-divider"></div>
@@ -104,4 +104,4 @@ function NavBarLanding ({ logoutHandler }) {
   )
 }
 
-export default NavBarLanding
+export default NavBarLogin

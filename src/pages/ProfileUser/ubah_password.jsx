@@ -1,40 +1,44 @@
 import React from 'react'
-import NavbarLogin from '../../components/NavBarLogin'
-import { NavLink } from 'react-router-dom'
-import UserMenu from '../../components/UserMenu'
 
-function UbahPasswordPage ({ onLogout }) {
+function UbahPasswordPage ({ titlePage, subtitlePage }) {
   return (
-        <div>
-            <NavbarLogin logoutHandler={onLogout}/>
-            <div className="container mt-4 mb-5">
-                <h2>Ubah Password</h2>
-                <h6>Kalau kamu lupa password kamu, kamu bisa ganti password kamu disini!</h6>
-                <div className="row mt-4">
-                    <div className="col-lg-3">
-                        <UserMenu logoutHandler={onLogout}/>
-                    </div>
-                    <div className="col">
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"/>
-                        </div>
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <div>
+      <div className="mb-4">
+        <h2 className="font-weight-bold">{titlePage}</h2>
+        <h6>{subtitlePage}</h6>
+      </div>
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+          <small id="emailHelp" class="form-text text-muted">
+            We'll never share your email with anyone else.
+          </small>
         </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+          <label class="form-check-label" for="exampleCheck1">
+            Check me out
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </div>
   )
 }
 

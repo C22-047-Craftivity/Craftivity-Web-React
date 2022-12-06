@@ -3,8 +3,8 @@ html, body {
     margin: 0px;
 }
 
-.menuAdmin {
-    height: 100vh;
+.menuMitra {
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     gap: 10px;

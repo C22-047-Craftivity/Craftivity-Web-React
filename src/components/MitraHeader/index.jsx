@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Logo from '../../assets/Logo.png'
 import { getMitra } from '../../confiq/firebase'
 import CONFIQ from '../../confiq/confiq'
-import './adminHeader.css'
+import './mitraHeader.css'
 
 function Index () {
   const [mitra, setMitra] = useState([])
@@ -16,12 +16,12 @@ function Index () {
   }, [])
 
   return (
-    <div className='headerAdmin'>
+    <div className='headerMitra'>
         <img src={Logo} alt='Logo Craftivity' />
         <h1>TOKO KU</h1>
         <div className='akunProfil'>
-            <img className='img-fluid' src={mitra.profile_picture} alt='Profil' />
-            <p>{mitra.nameStore}</p>
+            <img className='img-fluid' src={mitra.profilePicture} alt='Profil' />
+            <p>{mitra.namaToko}</p>
         </div>
     </div>
   )
