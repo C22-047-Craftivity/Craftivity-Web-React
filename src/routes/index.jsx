@@ -20,6 +20,7 @@ import HeaderMitra from '../components/MitraHeader'
 import MenuMitra from '../components/MitraMenu'
 import ProfilMitra from '../pages/ProfilMitra'
 import ListBarangMitra from '../pages/ListBarangMitra'
+import DetailBarangMitra from '../pages/DetailBarangMitra'
 import FooterMitra from '../components/MitraFooter'
 
 function Index () {
@@ -98,10 +99,10 @@ function Index () {
             </div>
             <div className='col-sm-9 col-10'>
               <Routes>
-                <Route path="/detail" element={<DetailPage />} />
+                {/* <Route path="/" element={<DetailPage />} /> */}
                 <Route path="/profil" element={<ProfilMitra />} />
                 <Route path="/list-barang" element={<ListBarangMitra />} />
-                <Route path="/forum" element={<DetailPage />} />
+                <Route path="/detail/:idBrg" element={<DetailBarangMitra />} />
               </Routes>
             </div>
           </div>

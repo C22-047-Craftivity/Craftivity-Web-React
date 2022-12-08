@@ -225,7 +225,7 @@ export function uploadProfilMitra (file, data) {
   )
 }
 
-export function saveProdukTemp ({ idBrg, idMitra, nama, gambarBrg, deskripsi, harga, rating, terjual, kategori, reviews = '' }) {
+export function saveProdukTemp ({ idBrg, idMitra, nama, gambarBrg, deskripsi, harga, rating, terjual, kategori, reviews }) {
   set(ref(database, 'Produk/' + idBrg), {
     idBrg,
     idMitra,
