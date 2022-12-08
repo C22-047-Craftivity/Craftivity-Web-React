@@ -1,7 +1,9 @@
 import StarIcon from '../../assets/Star.svg'
 
 function Index ({ lengthStar }) {
-  if (lengthStar === 1) {
+  if (lengthStar === 0) {
+    return <span style={{ fontSize: '16px' }}>Belum ada rating</span>
+  } else if (lengthStar === 1) {
     return (
       <>
         <img src={StarIcon} style={{ width: 15 }} alt="" />

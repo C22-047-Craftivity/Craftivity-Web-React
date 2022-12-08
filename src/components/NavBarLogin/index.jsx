@@ -15,7 +15,6 @@ function NavBarLogin ({ logoutHandler }) {
     async function getDataUserById () {
       const { user } = await getUserById(localStorage.getItem(CONFIQ.authUser))
       setUser(user)
-      console.log(user)
     }
     getDataUserById()
   }, [])
