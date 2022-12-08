@@ -45,7 +45,7 @@ export function registerUser (nama, email, password) {
   )
 }
 
-function saveUserData ({ idUser, nama, email, noHp = '', profilePicture = 'https://firebasestorage.googleapis.com/v0/b/craftivity-batch3.appspot.com/o/profilTemplate.jpg?alt=media&token=e199f8a1-f33f-4c85-8b51-e07641ef7194', alamat = '', keranjang = '', favorit = '' }) {
+export function saveUserData ({ idUser, nama, email, noHp = '', profilePicture = 'https://firebasestorage.googleapis.com/v0/b/craftivity-batch3.appspot.com/o/profilTemplate.jpg?alt=media&token=e199f8a1-f33f-4c85-8b51-e07641ef7194', alamat = '', keranjang = '', favorit = '' }) {
   set(ref(database, 'User/' + idUser), {
     idUser,
     nama,
@@ -187,6 +187,21 @@ export function getAllUser () {
   )
 }
 
+export function getUserById (userId) {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/User/' + userId))
+      .then((snapshot) => {
+        const data = snapshot.val()
+        return { user: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      }
+      )
+  )
+}
+
 export function uploadProfilMitra (file, data) {
   const imagePath = `profilMitra/${+new Date()}${file.name}`
   const storageRef = refImg(storage, imagePath)
@@ -210,7 +225,7 @@ export function uploadProfilMitra (file, data) {
   )
 }
 
-export function saveProdukTemp ({ idBrg, idMitra, nama, gambarBrg, deskripsi, harga, rating, terjual, kategori, reviews = '' }) {
+export function saveProdukTemp ({ idBrg, idMitra, nama, gambarBrg, deskripsi, harga, rating, terjual, kategori, reviews }) {
   set(ref(database, 'Produk/' + idBrg), {
     idBrg,
     idMitra,
@@ -269,6 +284,25 @@ export function getAllProduk () {
       .catch((error) => {
         console.error(error)
         return { error: true, AllProduk: null }
+      })
+  )
+}
+
+export function getProduk (idBarang) {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/Produk/' + idBarang))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val()
+          return { error: false, produk: data }
+        } else {
+          return { error: false, produk: null }
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+        return { error: true, produk: null }
       })
   )
 }

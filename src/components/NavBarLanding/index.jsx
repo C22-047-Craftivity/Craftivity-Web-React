@@ -1,6 +1,6 @@
 import React from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import '../NavBarLanding/navbar-style.css'
 import FavoriteIcon from '../../assets/Favorite.svg'
 import CartIcon from '../../assets/Cart.svg'
@@ -8,9 +8,9 @@ import CartIcon from '../../assets/Cart.svg'
 function NavBarLanding () {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-custom">
-      <Link to="/" className="navbar-brand p-3 font-weight-bold">
+      <NavLink to="/" className="navbar-brand p-3 font-weight-bold">
         Craftivity
-      </Link>
+      </NavLink>
       <button
         className="navbar-toggler"
         type="button"
@@ -41,19 +41,19 @@ function NavBarLanding () {
         </div>
         <ul className="navbar-nav ml-auto mr-3">
           <li className="nav-item active">
-            <Link to="/favorite" className="circle-button mr-4">
+            <NavLink to="/favorite" className="circle-button mr-4">
               <img src={FavoriteIcon} alt="" />
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/keranjang" className="circle-button mr-4">
+            <NavLink to="/keranjang" className="circle-button mr-4">
               <img src={CartIcon} alt="" />
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/login" className="square-button" style={{ textDecoration: 'none' }}>
+            <NavLink to="/login" className="square-button mr-4" style={{ textDecoration: 'none' }}>
               <h4>Login</h4>
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>

@@ -25,7 +25,7 @@ export default function Index ({ onLogout }) {
         <NavLink to='/' className={({ isActive }) => 'btn-menu' + (!isActive ? '' : ' active')}><MdDashboardCustomize /><span> Dashboard</span></NavLink>
         <NavLink to='/profil' className={({ isActive }) => 'btn-menu' + (!isActive ? '' : ' active')}><FaUserEdit /><span> Profil</span></NavLink>
         <NavLink to='/list-barang' className={({ isActive }) => 'btn-menu' + (!isActive ? '' : ' active')}><FaBoxes /><span> Barang</span></NavLink>
-        <NavLink to='/forum' className={({ isActive }) => 'btn-menu' + (!isActive ? '' : ' active')}><MdForum /><span> Forum</span></NavLink>
+        <button className='btn-menu' onClick={ () => Swal.fire('SEGERA HADIR', 'Fitur ini sedang dalam pengembangan', 'info') } ><MdForum /><span> Forum</span></button>
         <button className='btn-menu mt-3' onClick={logout} ><FaSignOutAlt /><span> Keluar</span></button>
     </div>
   )

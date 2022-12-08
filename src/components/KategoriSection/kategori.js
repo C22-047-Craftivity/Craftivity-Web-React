@@ -1,64 +1,28 @@
 const kategori = [
   {
     id: 1,
-    src: 'https://www.disability-grants.org/images/craft-time.jpg',
-    name: 'Image 1'
+    src: 'https://akcdn.detik.net.id/visual/2021/09/09/aksesoris-cincin-manik-manik-unik-dan-lucu-handmadefoto-idpinterestcometsycom_11.jpeg?w=480&q=90',
+    name: 'Aksesoris Badan'
   },
   {
     id: 2,
-    src: 'https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/topic_centers/depression/1296x728_HEADER_How-crafting-can-help-depression.jpg?w=1155&h=1528',
-    name: 'Image 2 '
+    src: 'https://www.lamudi.co.id/journal/wp-content/uploads/2020/05/Pinterest-Tanaman-Hias.jpg',
+    name: 'Aksesoris Rumah'
   },
   {
     id: 3,
-    src: 'https://st.depositphotos.com/1000604/2118/i/600/depositphotos_21188543-stock-photo-scrap-details.jpg',
-    name: 'Image 3'
+    src: 'https://betanews.id/wp-content/uploads/2021/08/20210803_BETANEWS_KDW_Perabotan-Rumah-Tangga-dari-Kayu-di-Mimu-Wood-Craft-2.jpg',
+    name: 'Kayu'
   },
   {
-    id: 3,
-    src: 'https://st.depositphotos.com/1000604/2118/i/600/depositphotos_21188543-stock-photo-scrap-details.jpg',
-    name: 'Image 3'
+    id: 4,
+    src: 'https://www.wikihow.com/images/2/2e/Make-Floral-Craft-Arrangements-Step-15.jpg',
+    name: 'Bunga'
   },
   {
-    id: 3,
-    src: 'https://st.depositphotos.com/1000604/2118/i/600/depositphotos_21188543-stock-photo-scrap-details.jpg',
-    name: 'Image 3'
-  },
-  {
-    id: 3,
-    src: 'https://st.depositphotos.com/1000604/2118/i/600/depositphotos_21188543-stock-photo-scrap-details.jpg',
-    name: 'Image 3'
-  },
-
-  {
-    id: 3,
-    src: 'https://st.depositphotos.com/1000604/2118/i/600/depositphotos_21188543-stock-photo-scrap-details.jpg',
-    name: 'Image 3'
-  },
-  {
-    id: 3,
-    src: 'https://st.depositphotos.com/1000604/2118/i/600/depositphotos_21188543-stock-photo-scrap-details.jpg',
-    name: 'Image 3'
-  },
-  {
-    id: 3,
-    src: 'https://st.depositphotos.com/1000604/2118/i/600/depositphotos_21188543-stock-photo-scrap-details.jpg',
-    name: 'Image 3'
-  },
-  {
-    id: 3,
-    src: 'https://st.depositphotos.com/1000604/2118/i/600/depositphotos_21188543-stock-photo-scrap-details.jpg',
-    name: 'Image 3'
-  },
-  {
-    id: 3,
-    src: 'https://st.depositphotos.com/1000604/2118/i/600/depositphotos_21188543-stock-photo-scrap-details.jpg',
-    name: 'Image 3'
-  },
-  {
-    id: 3,
-    src: 'https://st.depositphotos.com/1000604/2118/i/600/depositphotos_21188543-stock-photo-scrap-details.jpg',
-    name: 'Image 3'
+    id: 5,
+    src: 'https://ae01.alicdn.com/kf/H2c3687ded84c4748b3ae36b86b723540N/Gratis-Pengiriman-Kayu-Model-Truk-Kerajinan-Dekorasi-12PCS-Mobil-Mainan-Anak-anak-Klasik-Truk-Mini-Anak.jpg',
+    name: 'Mainan'
   }
 ]
 export default kategori

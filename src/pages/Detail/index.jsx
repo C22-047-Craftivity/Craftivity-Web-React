@@ -1,5 +1,4 @@
-// import { useParams, useNavigate } from 'react-router-dom';
-import NavBarLanding from '../../components/NavBarLanding'
+import NavBarLogin from '../../components/NavBarLogin'
 import Footer from '../../components/Footer'
 import populer from '../../components/PopulerSection/populer'
 import { useEffect, useState } from 'react'
@@ -12,13 +11,40 @@ import CountDetail from '../../components/Detail/count-detail'
 import { ButtonBeli, ButtonKeranjang } from '../../components/Button'
 import StarWidget from '../../components/Star'
 import ReviewItem from '../../components/Review/review-item'
+import { useParams } from 'react-router-dom'
+import { getMitra, getProduk } from '../../confiq/firebase'
+import Loading from '../../components/Loading'
+import EmptyList from '../../assets/emptyList.png'
 
-import '../Detail/detail.css'
-
-function Index () {
+function Index ({ onLogout }) {
   const data = populer[0]
   const [jumlah, setJumlah] = useState(1)
-  const [totalHarga, setTotal] = useState(data.harga)
+  const { id } = useParams()
+  const [loading, setLoading] = useState(false)
+  const [produk, setProduk] = useState({})
+  const [totalHarga, setTotal] = useState(produk.harga)
+  const [mitra, setMitra] = useState([])
+
+  async function getProdukById () {
+    setLoading(true)
+    const { error, produk } = await getProduk(id)
+    const { Mitra } = await getMitra(produk.idMitra)
+    if (!error) {
+      setProduk(produk)
+      setMitra(Mitra)
+      setTotal(produk.harga)
+    }
+    setLoading(false)
+  }
+
+  function NotFound () {
+    return (
+      <center>
+        <img src={EmptyList} width={400} height={400} className='img-fluid mx-auto d-block' alt='' />
+        <h6><b>Reviews tidak ditemukan!</b></h6>
+      </center>
+    )
+  }
 
   useEffect(() => {
     window.scrollTo({
@@ -26,29 +52,30 @@ function Index () {
       left: 0,
       behavior: 'smooth'
     })
-  }, [])
+    getProdukById()
+  }, [id])
 
   return (
     <div>
-      <NavBarLanding />
+      <NavBarLogin logoutHandler={onLogout}/>
+      <Loading visible={loading} />
       <div className="container mt-4 mb-5">
-        <h4>{data.name}</h4>
+        <h3>{produk.nama}</h3>
         <div className="row mb-5">
-        <ImageDetail data={data} />
+        <ImageDetail data={produk} />
         <div className="col-lg-6">
-          <h1>Rp.{data.harga}</h1>
-          <RincianDetail data={data} />
-          <TokoDetail data={data} />
-          <DeskripsiDetail data={data} />
+          <h1><b>Rp.{produk.harga}</b></h1>
+          <RincianDetail data={produk} />
+          <TokoDetail mitra={mitra} />
+          <DeskripsiDetail data={produk} />
 
           <span className="font-weight-bold">Banyak Beli</span>
           <div className="row">
             <CountDetail
-              harga={data.harga}
+              harga={produk.harga}
               jumlah={jumlah}
               setJumlah={setJumlah}
               setTotal={setTotal}
-              totalHarga={totalHarga}
             />
             <div className="col text-right">
             <span>Total Bayar</span>
@@ -65,18 +92,19 @@ function Index () {
       <div className="row text-center mt-4">
         <div className="col">
             <h6 className="font-weight-bold">Total Review</h6>
-            <div className="text-total-review">125 <span style={{ fontSize: 30 }}>review</span></div>
+            <div className="text-total-review">{[produk.reviews].length} <span style={{ fontSize: 30 }}>review</span></div>
         </div>
         <div className="col">
             <h6 className="font-weight-bold">Rata-rata Rating</h6>
-            <div className="text-total-bintang">4 <span><StarWidget lengthStar={data.star}/></span></div>
+            <div className="text-total-bintang">{produk.rating} <span><StarWidget lengthStar={produk.rating}/></span></div>
         </div>
       </div>
       <div className="p-4">
         {
-          data.review.map((review) => (
-            <ReviewItem review={review}/>
-          ))
+         [produk.reviews].length === 0
+           ? <NotFound/>
+           : [produk.reviews].map((review) => (<ReviewItem review={review}/>
+             ))
         }
       </div>
       </div>

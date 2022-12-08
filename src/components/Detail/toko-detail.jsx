@@ -1,16 +1,14 @@
-function TokoDetail ({ data }) {
+function TokoDetail ({ mitra }) {
   return (
     <div className="row mb-4 d-flex align-items-center">
       <div className="col-2">
-        <img
-          src={data.toko.image}
-          alt={data.toko.name}
+        <img src={mitra.profilePicture} alt={mitra.namaToko}
           className="image-toko"
         />
       </div>
       <div className="col">
-        <h5>{data.toko.name}</h5>
-        <h6>{data.toko.location}</h6>
+        <h5>{mitra.namaToko}</h5>
+        <h6>{mitra.kota}</h6>
       </div>
     </div>
   )

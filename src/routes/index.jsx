@@ -2,19 +2,26 @@ import { Route, Routes } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import CONFIQ from '../confiq/confiq'
 import { getAllMitra, getAllUser, logout } from '../confiq/firebase'
-import LandingPage from '../pages/Landing'
 import LoginUserPage from '../pages/LoginUser'
 import RegisterUserPage from '../pages/RegisterUser'
 import LoginMitraPage from '../pages/LoginMitra'
 import RegisterMitraPage from '../pages/RegisterMitra'
 import DetailPage from '../pages/Detail'
 import KeranjangPage from '../pages/Keranjang'
+import Swal from 'sweetalert2'
+import HomePage from '../pages/HomePage'
+import ProfileUserPage from '../pages/ProfileUser'
+import EditProfilePage from '../pages/ProfileUser/edit_profile'
+import AlamatPage from '../pages/ProfileUser/alamat'
+import LihatPesananPage from '../pages/ProfileUser/lihat_pesanan'
+import FavoritePage from '../pages/ProfileUser/favorite'
+import UbahPasswordPage from '../pages/ProfileUser/ubah_password'
 import HeaderMitra from '../components/MitraHeader'
 import MenuMitra from '../components/MitraMenu'
 import ProfilMitra from '../pages/ProfilMitra'
 import ListBarangMitra from '../pages/ListBarangMitra'
+import DetailBarangMitra from '../pages/DetailBarangMitra'
 import FooterMitra from '../components/MitraFooter'
-import Swal from 'sweetalert2'
 
 function Index () {
   const [authMitra, setAuthMitra] = useState(localStorage.getItem(CONFIQ.authMitra) || null)
@@ -92,10 +99,10 @@ function Index () {
             </div>
             <div className='col-sm-9 col-10'>
               <Routes>
-                <Route path="/" element={<DetailPage />} />
+                {/* <Route path="/" element={<DetailPage />} /> */}
                 <Route path="/profil" element={<ProfilMitra />} />
                 <Route path="/list-barang" element={<ListBarangMitra />} />
-                <Route path="/forum" element={<DetailPage />} />
+                <Route path="/detail/:idBrg" element={<DetailBarangMitra />} />
               </Routes>
             </div>
           </div>
@@ -105,14 +112,20 @@ function Index () {
       </>
     )
   }
-
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<LoginUserPage />} />
-      <Route path="/detail/:id" element={<DetailPage />} />
-      <Route path="/keranjang" element={<KeranjangPage/>}/>
-    </Routes>
+        <Route path="/" element={<HomePage onLogout={onLogout}/>} />
+        <Route path="/login" element={<LoginUserPage />} />
+        <Route path="/detail/:id" element={<DetailPage onLogout={onLogout}/>} />
+        <Route path="profile" element={<ProfileUserPage onLogout={onLogout}/>}>
+          <Route path="edit_profile" element={<EditProfilePage/>}/>
+          <Route path="alamat" element={<AlamatPage/>}/>
+          <Route path="pesanan" element={<LihatPesananPage />}/>
+          <Route path="list_favorite" element={<FavoritePage />}/>
+          <Route path="ubah_password" element={<UbahPasswordPage />}/>
+        </Route>
+        <Route path="/keranjang" element={<KeranjangPage/>}/>
+      </Routes>
   )
 }
 

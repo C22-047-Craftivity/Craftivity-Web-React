@@ -3,15 +3,12 @@
     width: 131px;
     height: 131px;
     object-fit: cover;
-    object-position: center;
-}
-
-.item-kategori{
-    text-align: center;
 }
 
 .item-kategori p{
+    align-items: center;
     margin-top: 10px;
+    color: #212529;
 }
 
 .container-kategori{
