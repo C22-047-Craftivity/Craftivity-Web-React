@@ -1,0 +1,41 @@
+.card-product{
+    background-color: white;
+    border-radius: 34px;
+    border: 2px solid #FA984D;
+    padding: 14px;
+    transition: 0.3s;
+}
+
+.card-product .image-product img{
+    border-radius: 34px;
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.product-button-beli{
+    display: inline-block;
+    border: none;
+    text-align: center;
+    padding: 0.70em;
+    font-size: 20;
+    color: white;
+    font-weight: bold;
+    border-radius: 30px;
+    width: 100%;
+    background-color: #FA984D;
+    transition: 0.3s;
+}
+
+.product-button-beli:hover{
+    box-shadow: 0px 10px 17px 0px #FA984D;
+}
+
+.card-product:hover{
+    box-shadow: 0px 2px 14px 0px rgba(0, 0, 0, 0.4);
+}
+
+.body-product{
+    word-wrap: break-word;
+}

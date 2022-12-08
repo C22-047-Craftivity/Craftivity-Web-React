@@ -1,0 +1,207 @@
+.login{
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    padding: 35px;
+    justify-content: space-around;
+}
+
+.leftSection{
+    background-image: linear-gradient(to bottom right, rgba(253, 178, 71, 0.9) 30%, rgba(183, 126, 251, 0.9));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 30px;
+}
+
+.leftSection h3{
+    margin-bottom: 20px;
+}
+.leftSection p{
+    width: 80%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.rightSection{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.intro{
+    color: black;
+    font-weight: bold;
+    font-size: 48px;
+    padding: 5px 10px;
+    border-bottom: 4px solid black;
+    text-align: center;
+}
+
+.input-login{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-login input{
+    margin-bottom: 20px;
+    border-radius: 50px;
+    padding: 10px 15px;
+    border: 1px solid #AF7AEE;
+    box-shadow: 0px 0px 5px #bdbdbd;
+}
+
+input:focus{
+    outline: none;
+}
+
+input::-webkit-input-placeholder{
+    color: black;
+    font-weight: 600;
+}
+
+input::-moz-input-placeholder{
+    color: black;
+    font-weight: bold;
+}
+
+input::-ms-input-placeholder{
+    color: black;
+    font-weight: bold;
+}
+
+.iconPass{
+    position:absolute;
+    bottom: 30px;
+    right: 15px;
+    font-size: 30px;
+    color: #AF7AEE;
+    background-color: white;
+}
+
+.iconPass:hover{
+    cursor: pointer;
+}
+
+.lupaPass{
+    color: black;
+    text-align: right;
+    font-size: 16px;
+    letter-spacing: .5px;
+}
+
+.lupaPass button{
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    color: #AF7AEE;
+    font-size: 16px;
+    letter-spacing: .5px;
+}
+
+.btn-masuk {
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    font-size: 24px;
+    padding: 5px;
+    margin-top: 40px;
+    background-color: #FA984D;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px #FA984D;
+    cursor: pointer;
+}
+
+.btn-masuk:hover{
+    background-color: #fa984dd9;
+}
+
+.btn-masuk:active{
+    transform: scale(0.95);
+}
+
+u{
+    color: #9F75F2;
+}
+
+@media screen and (max-width:1200px) {
+    .leftSection{
+        width: 40%;
+    }
+
+    .leftSection img{
+        width: 350px;
+        height: 450px;
+    }
+    
+    .rightSection{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:850px) {
+    .leftSection{
+        width: 100%;
+    }
+
+    .intro{
+        display: none;
+    }
+    
+    .rightSection{
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.4);
+        padding: 20px;
+        border-radius: 20px;
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);;
+    }
+
+    .btn-masuk{
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width:430px) {
+    .login{
+        justify-content: space-between;
+        padding: 0;
+    }
+
+    .leftSection{
+        width: 100%;
+        border-radius: 0px;
+    }
+
+    .intro{
+        display: none;
+    }
+    
+    .rightSection{
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.4);
+        padding: 20px;
+        border-radius: 20px;
+        width: 80%;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -20%);;
+    }
+
+    .btn-masuk{
+        margin-bottom: 30px;
+    }
+
+    .rightSection p{
+        font-size: 10px;
+    }
+}
