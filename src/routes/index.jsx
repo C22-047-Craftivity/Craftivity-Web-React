@@ -123,7 +123,7 @@ function Index () {
           <Route path="list_favorite" element={<FavoritePage />}/>
           <Route path="ubah_password" element={<UbahPasswordPage />}/>
         </Route>
-        <Route path="/keranjang" element={<KeranjangPage/>}/>
+        <Route path="/keranjang" element={<KeranjangPage onLogout={onLogout}/>}/>
       </Routes>
   )
 }

@@ -26,18 +26,14 @@ function AlamatPage ({ titlePage, subtitlePage }) {
     setLoading(true)
     const dataAlamat = {
       idalamat: +new Date(),
-      iduser: localStorage.getItem(CONFIQ.authUser),
       namaPenerima,
       tujuan,
       notelp
     }
-    const { error } = await saveUserData({ ...user, alamat: [user.alamat, dataAlamat] })
-    if (!error) {
-      window.location.reload()
-    } else {
-      Swal.fire('Gagal', 'Terjadi kesalahan dalam menambah barang, lakukan beberapa saat lagi!', 'error')
+    const result = await saveUserData({ ...user, alamat: user.alamat === '' ? [dataAlamat] : [...user.alamat, dataAlamat] })
+    if (result) {
+      Swal.fire('Berhasil', 'Alamat berhasil ditambahkan', 'success').then(window.location.reload).then(setLoading(false))
     }
-    setLoading(false)
   }
 
   useEffect(() => {
@@ -46,13 +42,19 @@ function AlamatPage ({ titlePage, subtitlePage }) {
 
   function ItemAlamat ({ alamat }) {
     return (
-      <div className='card shadow'>
-        <div className="card-body">
-          <h3>{alamat.namaPenerima}</h3>
-          <span>{alamat.notelp}</span>
-          <p>{alamat.tujuan}</p>
-        </div>
-      </div>
+      <>
+        {
+        alamat?.map((data, i) => (
+          <div className='card shadow mb-3' key={i}>
+            <div className="card-body">
+              <h3>{data.namaPenerima}</h3>
+              <span>{data.notelp}</span>
+              <p>{data.tujuan}</p>
+            </div>
+          </div>
+        ))
+      }
+      </>
     )
   }
 
@@ -116,7 +118,7 @@ function AlamatPage ({ titlePage, subtitlePage }) {
           </div>
         </div>
         <div>
-        {user.alamat.length === 0 ? <ItemNotFound /> : <ItemAlamat alamat={user.alamat} />}
+        {user.alamat === '' ? <ItemNotFound /> : <ItemAlamat alamat = {user.alamat}/>}
         </div>
       </div>
     </div>

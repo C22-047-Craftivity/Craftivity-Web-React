@@ -6,9 +6,9 @@ function ButtonBeli () {
   )
 }
 
-function ButtonKeranjang () {
+function ButtonKeranjang ({ onTambahKeranjang }) {
   return (
-    <button className="button-keranjang">Tambah Keranjang</button>
+    <button className="button-keranjang" onClick={() => { onTambahKeranjang() }}>Tambah Keranjang</button>
   )
 }
 
@@ -24,10 +24,16 @@ function ButtonCheckout () {
   )
 }
 
-function ButtonHapus () {
+function ButtonHapus ({ onDelete, idKeranjang }) {
   return (
-    <button className="button-hapus">Hapus</button>
+    <button className="button-hapus mr-2" onClick={() => onDelete(idKeranjang)}>Hapus</button>
   )
 }
 
-export { ButtonBeli, ButtonKeranjang, ButtonCari, ButtonCheckout, ButtonHapus }
+function ButtonEdit ({ onDelete, idKeranjang }) {
+  return (
+    <button className="button-edit" onClick={() => onDelete(idKeranjang)}>Edit</button>
+  )
+}
+
+export { ButtonBeli, ButtonKeranjang, ButtonCari, ButtonCheckout, ButtonHapus, ButtonEdit }
