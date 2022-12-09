@@ -1,6 +1,5 @@
 import NavBarLogin from '../../components/NavBarLogin'
 import Footer from '../../components/Footer'
-import populer from '../../components/PopulerSection/populer'
 import { useEffect, useState } from 'react'
 
 import DeskripsiDetail from '../../components/Detail/deskripsi-detail'
@@ -12,18 +11,20 @@ import { ButtonBeli, ButtonKeranjang } from '../../components/Button'
 import StarWidget from '../../components/Star'
 import ReviewItem from '../../components/Review/review-item'
 import { useParams } from 'react-router-dom'
-import { getMitra, getProduk } from '../../confiq/firebase'
+import { getMitra, getProduk, getUserById, saveUserData } from '../../confiq/firebase'
 import Loading from '../../components/Loading'
 import EmptyList from '../../assets/emptyList.png'
+import Swal from 'sweetalert2'
+import CONFIQ from '../../confiq/confiq'
 
 function Index ({ onLogout }) {
-  const data = populer[0]
   const [jumlah, setJumlah] = useState(1)
   const { id } = useParams()
   const [loading, setLoading] = useState(false)
   const [produk, setProduk] = useState({})
   const [totalHarga, setTotal] = useState(produk.harga)
   const [mitra, setMitra] = useState([])
+  const [user, setUser] = useState([])
 
   async function getProdukById () {
     setLoading(true)
@@ -37,10 +38,27 @@ function Index ({ onLogout }) {
     setLoading(false)
   }
 
+  async function getDataUser () {
+    const { user } = await getUserById(localStorage.getItem(CONFIQ.authUser))
+    setUser(user)
+  }
+
+  function TambahKeranjang () {
+    const dataKeranjang = {
+      idKeranjang: +new Date(),
+      idBarang: id,
+      jumlah,
+      totalHarga
+    }
+    const result = saveUserData({ ...user, keranjang: user.keranjang === '' ? [dataKeranjang] : [...user.keranjang, dataKeranjang] })
+    Swal.fire('Berhasil', 'Berhasil ditambahkan ke keranjang', 'success')
+    window.location.reload()
+  }
+
   function NotFound () {
     return (
       <center>
-        <img src={EmptyList} width={400} height={400} className='img-fluid mx-auto d-block' alt='' />
+        <img src={EmptyList} width={250} height={250} className='img-fluid mx-auto d-block' alt='' />
         <h6><b>Reviews tidak ditemukan!</b></h6>
       </center>
     )
@@ -53,6 +71,7 @@ function Index ({ onLogout }) {
       behavior: 'smooth'
     })
     getProdukById()
+    getDataUser()
   }, [id])
 
   return (
@@ -64,7 +83,7 @@ function Index ({ onLogout }) {
         <div className="row mb-5">
         <ImageDetail data={produk} />
         <div className="col-lg-6">
-          <h1><b>Rp.{produk.harga}</b></h1>
+          <h1><b>{'Rp' + Number(produk.harga).toLocaleString('id-ID')}</b></h1>
           <RincianDetail data={produk} />
           <TokoDetail mitra={mitra} />
           <DeskripsiDetail data={produk} />
@@ -79,11 +98,11 @@ function Index ({ onLogout }) {
             />
             <div className="col text-right">
             <span>Total Bayar</span>
-            <h3 className="font-weight-bold">Rp.{totalHarga}</h3>
+            <h3 className="font-weight-bold">{'Rp' + Number(totalHarga).toLocaleString('id-ID')}</h3>
           </div>
           </div>
           <div className="row mt-5 d-flex justify-content-around">
-            <ButtonKeranjang />
+            <ButtonKeranjang onTambahKeranjang={TambahKeranjang}/>
             <ButtonBeli />
           </div>
         </div>
@@ -101,10 +120,10 @@ function Index ({ onLogout }) {
       </div>
       <div className="p-4">
         {
-         [produk.reviews].length === 0
+         produk.reviews === ''
            ? <NotFound/>
-           : [produk.reviews].map((review) => (<ReviewItem review={review}/>
-             ))
+           : produk.reviews?.map((review) => (<ReviewItem review={review}/>
+           ))
         }
       </div>
       </div>

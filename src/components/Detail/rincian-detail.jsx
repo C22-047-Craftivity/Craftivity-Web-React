@@ -10,7 +10,7 @@ function RincianDetail ({ data }) {
         <span className="ml-2">({data.rating})</span>
       </div>
       <span className="block"></span>
-      <h6>Kategori cincin</h6>
+      <h6>Kategori {data.kategori}</h6>
     </div>
   )
 }

@@ -75,3 +75,18 @@
 .button-hapus:hover{
     box-shadow: 0px 5px 17px 0px #F08181;
 }
+
+.button-edit{
+    display: inline-block;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 15px;
+    background-color:#FA984D;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+}
+
+.button-edit:hover{
+    box-shadow: 0px 5px 17px 0px #FA984D;
+}

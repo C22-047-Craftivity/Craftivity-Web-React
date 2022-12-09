@@ -2,6 +2,7 @@ import '../Footer/footer.css'
 import { FaFacebookF, FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { BiSearchAlt } from 'react-icons/bi'
+import DownloadApp from '../../assets/DownloadApp.png'
 
 function Index () {
   return (
@@ -31,26 +32,15 @@ function Index () {
             </div>
             <div className="col">
                 <p className="text-headline-section">Kategori</p>
-                <Link to="/kategori:id" className='menus-link'>Ketegori 1</Link><br /><br />
-                <Link to="/kategori:id" className='menus-link'>Ketegori 2</Link><br /><br />
-                <Link to="/kategori:id" className='menus-link'>Ketegori 3</Link><br /><br />
-                <Link to="/kategori:id" className='menus-link'>Ketegori 4</Link>
+                <Link to="/kategori/Aksesoris Badan" className='menus-link'>Aksesoris Badan</Link><br /><br />
+                <Link to="/kategori/Aksesoris Rumah" className='menus-link'>Aksesoris Rumah</Link><br /><br />
+                <Link to="/kategori/Kayu" className='menus-link'>Kayu</Link><br /><br />
+                <Link to="/kategori/Bunga" className='menus-link'>Bunga</Link><br /><br />
+                <Link to="/kategori/Mainan" className='menus-link'>Mainan</Link>
             </div>
             <div className="col">
-                <p className="text-headline-section">Cari Produk</p>
-                <div className="input-group">
-                    <input
-                    type="text"
-                    placeholder="Kalung, Bandung..."
-                    className="form-control search-input-custom"
-                    aria-label="Search Input"
-                    />
-                    <div className="input-group-append">
-                    <span className="input-group-text search-icon-custom">
-                        <BiSearchAlt style={{ width: 20 }}/>
-                    </span>
-                    </div>
-                </div>
+                <p className="text-headline-section">Download App</p>
+                <img src={DownloadApp} className='img-fluid' />
             </div>
         </div>
         <hr />

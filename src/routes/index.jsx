@@ -8,6 +8,8 @@ import LoginMitraPage from '../pages/LoginMitra'
 import RegisterMitraPage from '../pages/RegisterMitra'
 import DetailPage from '../pages/Detail'
 import KeranjangPage from '../pages/Keranjang'
+import Kategori from '../pages/Kategori'
+import Pencarian from '../pages/Pencarian'
 import Swal from 'sweetalert2'
 import HomePage from '../pages/HomePage'
 import ProfileUserPage from '../pages/ProfileUser'
@@ -22,6 +24,7 @@ import ProfilMitra from '../pages/ProfilMitra'
 import ListBarangMitra from '../pages/ListBarangMitra'
 import DetailBarangMitra from '../pages/DetailBarangMitra'
 import FooterMitra from '../components/MitraFooter'
+import ChekoutPage from '../pages/InvoicePembayaran'
 
 function Index () {
   const [authMitra, setAuthMitra] = useState(localStorage.getItem(CONFIQ.authMitra) || null)
@@ -117,6 +120,7 @@ function Index () {
         <Route path="/" element={<HomePage onLogout={onLogout}/>} />
         <Route path="/login" element={<LoginUserPage />} />
         <Route path="/detail/:id" element={<DetailPage onLogout={onLogout}/>} />
+        <Route path="/pembayaran/:id" element={<ChekoutPage onLogout={onLogout}/>} />
         <Route path="profile" element={<ProfileUserPage onLogout={onLogout}/>}>
           <Route path="edit_profile" element={<EditProfilePage/>}/>
           <Route path="alamat" element={<AlamatPage/>}/>
@@ -124,7 +128,9 @@ function Index () {
           <Route path="list_favorite" element={<FavoritePage />}/>
           <Route path="ubah_password" element={<UbahPasswordPage />}/>
         </Route>
-        <Route path="/keranjang" element={<KeranjangPage/>}/>
+        <Route path="/keranjang" element={<KeranjangPage onLogout={onLogout}/>}/>
+        <Route path="/kategori/:id" element={<Kategori onLogout={onLogout} />}/>
+        <Route path="/:keyword" element={<Pencarian onLogout={onLogout} />}/>
       </Routes>
   )
 }

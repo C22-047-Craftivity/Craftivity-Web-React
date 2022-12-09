@@ -56,6 +56,7 @@ function Index () {
         navigate('/')
       }
       setLoading(false)
+      window.location.reload()
     } else {
       Swal.fire('Gagal', 'Password tidak sesuai', 'error')
     }

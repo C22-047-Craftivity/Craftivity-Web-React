@@ -225,7 +225,30 @@ export function uploadProfilMitra (file, data) {
   )
 }
 
-export function saveProdukTemp ({ idBrg, idMitra, nama, gambarBrg, deskripsi, harga, rating, terjual, kategori, reviews }) {
+export function uploadProfilUser (file, data) {
+  const imagePath = `profilUser/${+new Date()}${file.name}`
+  const storageRef = refImg(storage, imagePath)
+  return (
+    uploadBytes(storageRef, file)
+      .then(() => {
+        getDownloadURL(refImg(storage, imagePath))
+          .then((url) => {
+            saveUserData({ ...data, profilePicture: url })
+          })
+          .catch((error) => {
+            Swal.fire(error.message)
+          })
+      })
+      .then(() => {
+        return { error: false }
+      }).catch((error) => {
+        Swal.fire(error.message)
+        return { error: true }
+      })
+  )
+}
+
+export function saveProdukTemp ({ idBrg, idMitra, nama, gambarBrg, deskripsi, harga, rating, terjual, kategori, reviews = '' }) {
   set(ref(database, 'Produk/' + idBrg), {
     idBrg,
     idMitra,

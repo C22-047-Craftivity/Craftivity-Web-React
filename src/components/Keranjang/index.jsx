@@ -1,41 +1,58 @@
 import CountDetail from '../Detail/count-detail'
-import { useState } from 'react'
-import { ButtonHapus } from '../Button'
+import { useState, useEffect } from 'react'
+import { ButtonHapus, ButtonEdit } from '../Button'
 import '../Keranjang/keranjang.css'
+import { getProduk, getUserById } from '../../confiq/firebase'
+import CONFIQ from '../../confiq/confiq'
 
-function Index ({ keranjang }) {
-  const [jumlah, setJumlah] = useState(1)
-  const [totalHarga, setTotal] = useState(keranjang.harga)
+function Index ({ keranjang, onDeleteHandler }) {
+  const [jumlah, setJumlah] = useState(keranjang.jumlah)
+  const [totalHarga, setTotal] = useState(keranjang.totalHarga)
   const [pilih, setPilih] = useState(false)
+  const [produk, setProduk] = useState({})
+  const [produkChek, setCheckout] = useState([])
 
-  const handleClick = () => setPilih(!pilih)
+  // const handleClick = () => setPilih(!pilih)
+
+  async function getProdukById () {
+    const { error, produk } = await getProduk(keranjang.idBarang)
+    if (!error) {
+      setProduk(produk)
+    }
+  }
+
+  useEffect(() => {
+    getProdukById()
+  }, [])
 
   return (
     <div className="row align-items-center mt-3 card-product-keranjang">
-      <div className="col-0">
-        <input onClick={handleClick} checked={pilih} type="checkbox" />
-      </div>
       <div className="col-5">
         <div className="row align-items-center">
             <div className="col-5">
-            <img className="image-product-keranjang" width={100} src={keranjang.image} alt="" />
+            <img className="image-product-keranjang" width={100} src={produk.gambarBrg} alt="" />
             </div>
             <div className="col">
-                <h6><b>{keranjang.name}</b></h6>
-                <span>{keranjang.toko.name}</span>
+                <h6><b>{produk.nama}</b></h6>
+                {/* <span>{produk.toko.name}</span> */}
             </div>
         </div>
       </div>
-      <CountDetail
-        harga={20000}
+      {/* <CountDetail
+        harga={produk.harga}
         jumlah={jumlah}
         setJumlah={setJumlah}
         setTotal={setTotal}
         totalHarga={totalHarga}
-      />
-      <div className="col text-center">Rp.{keranjang.harga}</div>
-      <div className="col">
-        <ButtonHapus/>
+      /> */}
+      <div className="col-2">
+        <div className="row m-0 d-flex align-items-center justify-content-center">
+          <span>{jumlah} Item</span>
+        </div>
+      </div>
+      <div className="col text-center">Rp.{totalHarga}</div>
+      <div className="col d-flex justify-content-center">
+        <ButtonHapus onDelete = {onDeleteHandler} id = {keranjang.idKeranjang}/>
       </div>
     </div>
   )
