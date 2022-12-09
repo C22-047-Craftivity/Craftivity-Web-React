@@ -52,7 +52,7 @@ function Index ({ keranjang, onDeleteHandler }) {
       </div>
       <div className="col text-center">Rp.{totalHarga}</div>
       <div className="col d-flex justify-content-center">
-        <ButtonHapus onDelete = {onDeleteHandler} idKeranjang = {keranjang.idKeranjang}/>
+        <ButtonHapus onDelete = {onDeleteHandler} id = {keranjang.idKeranjang}/>
       </div>
     </div>
   )

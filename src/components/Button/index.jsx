@@ -1,4 +1,5 @@
 import '../Button/button.css'
+import { FaTrash } from 'react-icons/fa'
 
 function ButtonBeli () {
   return (
@@ -18,15 +19,15 @@ function ButtonCari () {
   )
 }
 
-function ButtonCheckout () {
+function ButtonCheckout ({ checkout }) {
   return (
-    <button className="button-checkout">Checkout Sekarang</button>
+    <button className="button-checkout" onClick={() => checkout()}>Checkout Sekarang</button>
   )
 }
 
-function ButtonHapus ({ onDelete, idKeranjang }) {
+function ButtonHapus ({ onDelete, id }) {
   return (
-    <button className="button-hapus mr-2" onClick={() => onDelete(idKeranjang)}>Hapus</button>
+    <button className="button-hapus" onClick={() => onDelete(id)}><FaTrash/> Hapus</button>
   )
 }
 

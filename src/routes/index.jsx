@@ -21,6 +21,7 @@ import MenuMitra from '../components/MitraMenu'
 import ProfilMitra from '../pages/ProfilMitra'
 import ListBarangMitra from '../pages/ListBarangMitra'
 import FooterMitra from '../components/MitraFooter'
+import ChekoutPage from '../pages/InvoicePembayaran'
 
 function Index () {
   const [authMitra, setAuthMitra] = useState(localStorage.getItem(CONFIQ.authMitra) || null)
@@ -116,6 +117,7 @@ function Index () {
         <Route path="/" element={<HomePage onLogout={onLogout}/>} />
         <Route path="/login" element={<LoginUserPage />} />
         <Route path="/detail/:id" element={<DetailPage onLogout={onLogout}/>} />
+        <Route path="/pembayaran/:id" element={<ChekoutPage onLogout={onLogout}/>} />
         <Route path="profile" element={<ProfileUserPage onLogout={onLogout}/>}>
           <Route path="edit_profile" element={<EditProfilePage/>}/>
           <Route path="alamat" element={<AlamatPage/>}/>

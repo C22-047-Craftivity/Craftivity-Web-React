@@ -1,32 +1,31 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-sequences */
-import NavBarLanding from '../../components/NavBarLanding'
 import Footer from '../../components/Footer'
 import '../Keranjang/keranjangPage.css'
-import { ButtonCari, ButtonCheckout } from '../../components/Button'
+import { ButtonCheckout } from '../../components/Button'
 import KeranjangItem from '../../components/Keranjang'
-import keranjang from '../../utils/data'
 import NavBarLogin from '../../components/NavBarLogin'
 import Loading from '../../components/Loading'
 import EmptyList from '../../assets/LoginVektorUser.png'
 import { useEffect, useState } from 'react'
 import { getUserById, saveUserData } from '../../confiq/firebase'
 import CONFIQ from '../../confiq/confiq'
-import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 function Index ({ onLogout }) {
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState([])
   const [totalItemAll, setTotalItem] = useState()
   const [totalHargaAll, setTotalHarga] = useState()
+  const navigate = useNavigate()
 
   async function getDataUser () {
     setLoading(true)
     const { user } = await getUserById(localStorage.getItem(CONFIQ.authUser))
     setUser(user)
+    setLoading(false)
     setTotalItem((user.keranjang?.reduce((a, v) => a = a + v.jumlah, 0)))
     setTotalHarga((user.keranjang?.reduce((b, w) => b = b + parseInt(w.totalHarga), 0)))
-    setLoading(false)
   }
 
   async function onDeleteKeranjang (id) {
@@ -43,6 +42,10 @@ function Index ({ onLogout }) {
         <h6><b>Keranjang kamu kosong. Pilih barang kamu dan masukkan ke keranjang!</b></h6>
       </center>
     )
+  }
+
+  function checkout () {
+    navigate(`/pembayaran/${124234}`)
   }
 
   useEffect(() => {
@@ -81,7 +84,7 @@ function Index ({ onLogout }) {
                                 <span>Total Semua</span>
                                 <h3>Rp. {totalHargaAll},-</h3>
                             </div>
-                            <ButtonCheckout/>
+                            <ButtonCheckout checkout = {checkout}/>
                         </div>
                     </div>
                 </div>
