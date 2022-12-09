@@ -1,7 +1,7 @@
 .card-product-keranjang{
     background-color: aliceblue;
     padding: 10px;
-    border-radius: 30px;
+    border-radius: 15px;
 }
 
 .image-product-keranjang{
@@ -9,7 +9,7 @@
     height: 130px;
     object-fit: cover;
     object-position: center;
-    border-radius: 34px;
+    border-radius: 15px;
 }
 
 .block{

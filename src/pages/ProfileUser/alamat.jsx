@@ -5,6 +5,7 @@ import EmptyList from '../../assets/emptyList.png'
 import Loading from '../../components/Loading'
 import Swal from 'sweetalert2'
 import useInput from '../../hooks/useInput'
+import { ButtonHapus } from '../../components/Button'
 
 function AlamatPage ({ titlePage, subtitlePage }) {
   const [user, setUser] = useState([])
@@ -26,18 +27,22 @@ function AlamatPage ({ titlePage, subtitlePage }) {
     setLoading(true)
     const dataAlamat = {
       idalamat: +new Date(),
-      iduser: localStorage.getItem(CONFIQ.authUser),
       namaPenerima,
       tujuan,
       notelp
     }
-    const { error } = await saveUserData({ ...user, alamat: [user.alamat, dataAlamat] })
-    if (!error) {
-      window.location.reload()
-    } else {
-      Swal.fire('Gagal', 'Terjadi kesalahan dalam menambah barang, lakukan beberapa saat lagi!', 'error')
-    }
+    const result = await saveUserData({ ...user, alamat: user.alamat === '' ? [dataAlamat] : [...user.alamat, dataAlamat] })
+    Swal.fire('Berhasil', 'Alamat berhasil ditambahkan', 'success')
+    window.location.reload()
     setLoading(false)
+  }
+
+  async function onDeleteAlamat (id) {
+    const itemAlamat = user.alamat?.filter((data) => data.idalamat !== id)
+    setUser({ ...user, alamat: itemAlamat.length < 1 ? '' : itemAlamat })
+    const result = await saveUserData({ ...user, alamat: itemAlamat.length < 1 ? '' : itemAlamat })
+    Swal.fire('Berhasil', 'Alamat berhasil dihapus', 'success')
+    window.location.reload()
   }
 
   useEffect(() => {
@@ -46,13 +51,26 @@ function AlamatPage ({ titlePage, subtitlePage }) {
 
   function ItemAlamat ({ alamat }) {
     return (
-      <div className='card shadow'>
-        <div className="card-body">
-          <h3>{alamat.namaPenerima}</h3>
-          <span>{alamat.notelp}</span>
-          <p>{alamat.tujuan}</p>
-        </div>
-      </div>
+      <>
+        {
+        alamat?.map((data, i) => (
+          <div className='card mb-3' key={i}>
+            <div className="card-body">
+              <div className="row d-flex align-items-center">
+                <div className="col">
+                  <h3>{data.namaPenerima}</h3>
+                  <span>{data.notelp}</span>
+                  <p>{data.tujuan}</p>
+                </div>
+                <div className="col-sm-3">
+                  <ButtonHapus onDelete={onDeleteAlamat} id={data.idalamat}/>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+      </>
     )
   }
 
@@ -72,7 +90,7 @@ function AlamatPage ({ titlePage, subtitlePage }) {
       <Loading visible={loading} />
       <div className="card-body">
         <div className="mb-4">
-          <div className="row d-flex justify-content-center align-items-center m-0">
+          <div className="row d-flex justify-content-center align-items-center">
             <div className="col">
               <h2 className="font-weight-bold">{titlePage}</h2>
               <h6>{subtitlePage}</h6>
@@ -93,15 +111,15 @@ function AlamatPage ({ titlePage, subtitlePage }) {
                       <form onSubmit={saveDataAlamat}>
                         <div className="form-group">
                           <label htmlFor="namaPenerima">Nama Penerima</label>
-                          <input type="text" className="form-control" id="namaPenerima" value={namaPenerima} onChange={setnamaPenerima} required />
+                          <input type="text" className="form-control" id="namaPenerima" value={namaPenerima} onChange={setnamaPenerima} placeholder={'Nama Penerima'} required />
                         </div>
                         <div className="form-group">
                           <label htmlFor="notelp">No Telepon Penerima</label>
-                          <input type="text" className="form-control" id="notelp" value={notelp} onChange={setNoTelp} required />
+                          <input type="text" className="form-control" id="notelp" placeholder={'No telepon penerima'} value={notelp} onChange={setNoTelp} required />
                         </div>
                         <div className="form-group">
                           <label htmlFor="tujuan">Alamat Tujuan</label>
-                          <textarea className="form-control" id="tujuan" value={tujuan} onChange={setTujuan} required />
+                          <textarea className="form-control" id="tujuan" value={tujuan} placeholder={'Alamat tujuan penerima'} onChange={setTujuan} required />
                         </div>
                         <div className='d-flex justify-content-around mt-3 mb-3'>
                           <button type="button" className="btn-batalSimpanProduk" data-dismiss="modal">Batal</button>
@@ -116,7 +134,7 @@ function AlamatPage ({ titlePage, subtitlePage }) {
           </div>
         </div>
         <div>
-        {user.alamat.length === 0 ? <ItemNotFound /> : <ItemAlamat alamat={user.alamat} />}
+        {user.alamat === '' ? <ItemNotFound /> : <ItemAlamat alamat = {user.alamat}/>}
         </div>
       </div>
     </div>

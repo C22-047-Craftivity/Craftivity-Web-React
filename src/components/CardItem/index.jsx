@@ -11,7 +11,7 @@ function PopulerItem ({ populer }) {
         </div>
         <div className="body-product mt-3">
             <h6>{'Rp' + Number(populer.harga).toLocaleString('id-ID')}</h6>
-            <h4>{populer.nama.length > 20 ? `${populer.nama.substring(0, 16)}...` : populer.nama}</h4>
+            <h4>{populer.nama.length > 20 ? `${populer.nama.substring(0, 15)}...` : populer.nama}</h4>
             <div className="d-flex align-items-center">
             <StarWidget lengthStar={parseInt(populer.rating)}/><span className="ml-2">({populer.rating})</span>
             </div>
