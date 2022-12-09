@@ -8,6 +8,8 @@ import LoginMitraPage from '../pages/LoginMitra'
 import RegisterMitraPage from '../pages/RegisterMitra'
 import DetailPage from '../pages/Detail'
 import KeranjangPage from '../pages/Keranjang'
+import Kategori from '../pages/Kategori'
+import Pencarian from '../pages/Pencarian'
 import Swal from 'sweetalert2'
 import HomePage from '../pages/HomePage'
 import ProfileUserPage from '../pages/ProfileUser'
@@ -125,6 +127,8 @@ function Index () {
           <Route path="ubah_password" element={<UbahPasswordPage />}/>
         </Route>
         <Route path="/keranjang" element={<KeranjangPage/>}/>
+        <Route path="/kategori/:id" element={<Kategori onLogout={onLogout} />}/>
+        <Route path="/:keyword" element={<Pencarian onLogout={onLogout} />}/>
       </Routes>
   )
 }

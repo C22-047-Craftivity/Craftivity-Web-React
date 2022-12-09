@@ -64,7 +64,7 @@ function Index ({ onLogout }) {
         <div className="row mb-5">
         <ImageDetail data={produk} />
         <div className="col-lg-6">
-          <h1><b>Rp.{produk.harga}</b></h1>
+          <h1><b>{'Rp' + Number(produk.harga).toLocaleString('id-ID')}</b></h1>
           <RincianDetail data={produk} />
           <TokoDetail mitra={mitra} />
           <DeskripsiDetail data={produk} />
@@ -79,7 +79,7 @@ function Index ({ onLogout }) {
             />
             <div className="col text-right">
             <span>Total Bayar</span>
-            <h3 className="font-weight-bold">Rp.{totalHarga}</h3>
+            <h3 className="font-weight-bold">{'Rp' + Number(totalHarga).toLocaleString('id-ID')}</h3>
           </div>
           </div>
           <div className="row mt-5 d-flex justify-content-around">
@@ -92,7 +92,7 @@ function Index ({ onLogout }) {
       <div className="row text-center mt-4">
         <div className="col">
             <h6 className="font-weight-bold">Total Review</h6>
-            <div className="text-total-review">{[produk.reviews].length} <span style={{ fontSize: 30 }}>review</span></div>
+            <div className="text-total-review">{produk.reviews === '' ? 0 : [produk.reviews].length} <span style={{ fontSize: 30 }}>review</span></div>
         </div>
         <div className="col">
             <h6 className="font-weight-bold">Rata-rata Rating</h6>
@@ -101,7 +101,7 @@ function Index ({ onLogout }) {
       </div>
       <div className="p-4">
         {
-         [produk.reviews].length === 0
+         produk.reviews === ''
            ? <NotFound/>
            : [produk.reviews].map((review) => (<ReviewItem review={review}/>
              ))

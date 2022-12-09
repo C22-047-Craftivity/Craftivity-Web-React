@@ -4,9 +4,7 @@ import images from '../../components/Carousel/image'
 import KategoriSection from '../../components/KategoriSection'
 import kategori from '../../components/KategoriSection/kategori'
 import TerlarisSection from '../../components/TerlarisSection'
-import terlaris from '../../components/TerlarisSection/terlaris'
 import PopulerSection from '../../components/PopulerSection'
-import populer from '../../components/PopulerSection/populer'
 import Footer from '../../components/Footer'
 import { useEffect, useState } from 'react'
 import { getAllProduk } from '../../confiq/firebase'
@@ -41,7 +39,7 @@ function Index ({ onLogout }) {
                     <KategoriSection categories={kategori}/>
                 </section>
                 <section className="mb-5">
-                    <TerlarisSection terlaris={terlaris}/>
+                    <TerlarisSection />
                 </section>
                 <section className="mb-5">
                     <PopulerSection populer={produk}/>
