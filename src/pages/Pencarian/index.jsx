@@ -30,7 +30,9 @@ export default function Index ({ onLogout }) {
       <Loading visible={loading} />
       <div className='container mt-5 mb-5'>
         <h1 className='mb-5'>Pencarian berdasarkan '{keyword}'</h1>
-        {produk.length === 0 ? <div className='text-center text-bold text-secondary'>Tidak ada Produk yang sesuai.</div> : produk.map((item, index) => (<CardItem key={index} populer={item} {...item} />))}
+        <div className='row'>
+          {produk.length === 0 ? <div className='text-center text-bold text-secondary'>Tidak ada Produk yang sesuai.</div> : produk.map((item, index) => (<CardItem key={index} populer={item} {...item} />))}
+        </div>
       </div>
       <Footer />
     </div>
