@@ -2,7 +2,7 @@ import NavBarLogin from '../../components/NavBarLogin'
 import Footer from '../../components/Footer'
 import '../InvoicePembayaran/invoicePembayaran.css'
 import { useState, useEffect } from 'react'
-import { getCheckout, getUserById, savePesanan, saveUserData } from '../../confiq/firebase'
+import { getCheckout, getProduk, getUserById, savePesanan, saveProduk, saveProdukTemp, saveUserData } from '../../confiq/firebase'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import Loading from '../../components/Loading'
 import Swal from 'sweetalert2'
@@ -11,6 +11,7 @@ import KeranjangItem from '../../components/Keranjang'
 import ItemBarang from '../../components/ItemBarang'
 import Select from 'react-select'
 import { ButtonPesan, ButtonKembali } from '../../components/Button'
+import { update } from 'firebase/database'
 
 function Index ({ onLogout }) {
   const { id } = useParams()
@@ -100,13 +101,15 @@ function Index ({ onLogout }) {
       totalPembayaran
     }
 
-    const pesananUser = {
-      idPemesanan: id
-    }
-
     if (valueAlamat !== '' && valueJasa !== '') {
+      produkChekout.barang?.map(async function barangChekout (data, i) {
+        const { error, produk } = await getProduk(data.idBarang)
+        if (!error) {
+          const countTerjual = produk.terjual + data.jumlah
+          const updateTerjual = await saveProdukTemp({ ...produk, terjual: countTerjual })
+        }
+      })
       const result = await savePesanan({ ...pesanan })
-      const userr = await saveUserData({ ...user, pesananUser })
       Swal.fire('Berhasil', 'Pesanan berhasil dibuat!', 'success').then(navigate('/'))
     } else if (valueAlamat === '' && valueJasa !== '') {
       Swal.fire('Gagal', 'Alamat tidak boleh kosong!', 'error')
