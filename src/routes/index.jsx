@@ -22,6 +22,7 @@ import MenuMitra from '../components/MitraMenu'
 import ProfilMitra from '../pages/ProfilMitra'
 import ListBarangMitra from '../pages/ListBarangMitra'
 import DetailBarangMitra from '../pages/DetailBarangMitra'
+import DashboardMitra from '../pages/DashboardMitra'
 import FooterMitra from '../components/MitraFooter'
 import ChekoutPage from '../pages/InvoicePembayaran'
 
@@ -101,7 +102,7 @@ function Index () {
             </div>
             <div className='col-sm-9 col-10'>
               <Routes>
-                {/* <Route path="/" element={<DetailPage />} /> */}
+                <Route path="/" element={<DashboardMitra />} />
                 <Route path="/profil" element={<ProfilMitra />} />
                 <Route path="/list-barang" element={<ListBarangMitra />} />
                 <Route path="/detail/:idBrg" element={<DetailBarangMitra />} />
@@ -119,7 +120,6 @@ function Index () {
         <Route path="/" element={<HomePage onLogout={onLogout}/>} />
         <Route path="/login" element={<LoginUserPage />} />
         <Route path="/detail/:id" element={<DetailPage onLogout={onLogout}/>} />
-        <Route path="/pembayaran/:id" element={<ChekoutPage onLogout={onLogout}/>} />
         <Route path="profile" element={<ProfileUserPage onLogout={onLogout}/>}>
           <Route path="edit_profile" element={<EditProfilePage/>}/>
           <Route path="alamat" element={<AlamatPage/>}/>
@@ -129,6 +129,7 @@ function Index () {
         <Route path="/favorite" element={<Favorit onLogout={onLogout}/>}/>
         <Route path="/kategori/:id" element={<Kategori onLogout={onLogout} />}/>
         <Route path="/:keyword" element={<Pencarian onLogout={onLogout} />}/>
+        <Route path="/pembayaran/:id" element={<ChekoutPage onLogout={onLogout}/>} />
       </Routes>
   )
 }

@@ -329,3 +329,60 @@ export function getProduk (idBarang) {
       })
   )
 }
+
+export function getCheckout (idPemesanan) {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/Checkout/' + idPemesanan))
+      .then((snapshot) => {
+        const data = snapshot.val()
+        return { checkout: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      }
+      )
+  )
+}
+
+export function saveCheckout ({ idPemesanan, idUser, barang, totalHargaAll, totalItemAll, tanggalPemesanan }) {
+  set(ref(database, 'Checkout/' + idPemesanan), {
+    idPemesanan,
+    idUser,
+    barang,
+    totalHargaAll,
+    totalItemAll,
+    tanggalPemesanan
+  })
+}
+
+export function savePesanan ({ checkout, iduser, idPemesanan, alamatPengiriman, jasaPengiriman, biayaLayanan, totalPembayaran }) {
+  set(ref(database, 'Pemesanan/' + idPemesanan), {
+    checkout,
+    iduser,
+    idPemesanan,
+    alamatPengiriman,
+    jasaPengiriman,
+    biayaLayanan,
+    totalPembayaran
+  })
+}
+
+export function getAllPemesanan () {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/Pemesanan'))
+      .then((snapshot) => {
+        const data = []
+        snapshot.forEach((childSnapshot) => {
+          const childKey = childSnapshot.key
+          const childData = childSnapshot.val()
+          data.push(childData)
+        })
+        return { error: false, dataPemesanan: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  )
+}

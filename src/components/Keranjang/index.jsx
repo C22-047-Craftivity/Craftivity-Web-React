@@ -26,7 +26,7 @@ function Index ({ keranjang, onDeleteHandler }) {
   }, [])
 
   return (
-    <div className="row align-items-center mt-3 card-product-keranjang">
+    <div className="row align-items-center mt-3 card-product-keranjang m-0">
       <div className="col-5">
         <div className="row align-items-center">
             <div className="col-5">

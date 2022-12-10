@@ -28,6 +28,21 @@
     box-shadow: 0px 10px 17px 0px #FA984D;
 }
 
+.button-pesan{
+    display: inline-block;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 15px;
+    background-color: #FA984D;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+}
+
+.button-pesan:hover{
+    box-shadow: 0px 10px 17px 0px #FA984D;
+}
+
 .button-cari{
     display: inline-block;
     border: none;

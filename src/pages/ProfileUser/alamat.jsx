@@ -18,7 +18,6 @@ function AlamatPage ({ titlePage, subtitlePage }) {
     setLoading(true)
     const { user } = await getUserById(localStorage.getItem(CONFIQ.authUser))
     setUser(user)
-    console.log(user)
     setLoading(false)
   }
 
@@ -42,7 +41,6 @@ function AlamatPage ({ titlePage, subtitlePage }) {
     setUser({ ...user, alamat: itemAlamat.length < 1 ? '' : itemAlamat })
     const result = await saveUserData({ ...user, alamat: itemAlamat.length < 1 ? '' : itemAlamat })
     Swal.fire('Berhasil', 'Alamat berhasil dihapus', 'success')
-    window.location.reload()
   }
 
   useEffect(() => {
@@ -86,7 +84,7 @@ function AlamatPage ({ titlePage, subtitlePage }) {
   }
 
   return (
-    <div className='card shadow-lg border-0'>
+    <div className='card shadow border-0'>
       <Loading visible={loading} />
       <div className="card-body">
         <div className="mb-4">

@@ -1,87 +1,203 @@
 import NavBarLogin from '../../components/NavBarLogin'
-import { ButtonCheckout } from '../../components/Button'
 import Footer from '../../components/Footer'
 import '../InvoicePembayaran/invoicePembayaran.css'
+import { useState, useEffect } from 'react'
+import { getCheckout, getProduk, getUserById, savePesanan, saveProduk, saveProdukTemp, saveUserData } from '../../confiq/firebase'
+import { useNavigate, useParams, Link } from 'react-router-dom'
+import Loading from '../../components/Loading'
+import Swal from 'sweetalert2'
+import CONFIQ from '../../confiq/confiq'
+import KeranjangItem from '../../components/Keranjang'
+import ItemBarang from '../../components/ItemBarang'
+import Select from 'react-select'
+import { ButtonPesan, ButtonKembali } from '../../components/Button'
+import { update } from 'firebase/database'
 
 function Index ({ onLogout }) {
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [produkChekout, setProdukCheckout] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [user, setUser] = useState([])
+  const [hargaJasa, setSelectJasa] = useState(0)
+
+  const [valueAlamat, setValueAlamat] = useState('')
+  const [valueJasa, setValueJasa] = useState('')
+
+  const biayaLayanan = 1000
+  const totalPembayaran = parseInt(produkChekout.totalHargaAll) + hargaJasa + biayaLayanan
+
+  const pengiriman = [
+    {
+      idPengiriman: 'JNEREG12',
+      namaJasa: 'JNE',
+      tipePengiriman: 'REGULER',
+      harga: 12000
+    },
+    {
+      idPengiriman: 'JNT2022',
+      namaJasa: 'J&T',
+      tipePengiriman: 'FAST',
+      harga: 22000
+    },
+    {
+      idPengiriman: 'EXCEPAT19',
+      namaJasa: 'EXPRESS',
+      tipePengiriman: 'KILAT',
+      harga: 19000
+    }
+  ]
+
+  async function getDataCheckout () {
+    setLoading(true)
+    const { checkout } = await getCheckout(id)
+    const { user } = await getUserById(checkout.idUser)
+    setUser(user)
+    setProdukCheckout(checkout)
+    setLoading(false)
+  }
+
+  const options = user.alamat === ''
+    ? []
+    : user.alamat?.map((c) => ({
+      value: c,
+      label: <div>
+    <h6>Nama Penerima : <b>{c.namaPenerima}</b></h6>
+    <h6>No Hp : {c.notelp}</h6>
+    <span>{c.tujuan}</span>
+  </div>
+    }))
+
+  const optionsPengiriman = pengiriman.map((c) => ({
+    value: c,
+    label: <div>
+    <h6>Nama Jasa: <b>{c.namaJasa}</b></h6>
+    <h6>Tipe Pengiriman: {c.tipePengiriman}</h6>
+    <span>Harga: Rp.{c.harga}</span>
+  </div>
+  }))
+
+  const handleSelectAlamat = (e) => {
+    setValueAlamat(e.value)
+  }
+
+  const handleSelectJasa = (e) => {
+    setValueJasa(e.value)
+    setSelectJasa(e.value.harga)
+  }
+
+  const kembaliChekout = () => {
+    navigate('/keranjang')
+  }
+
+  async function buatPesanan () {
+    const pesanan = {
+      checkout: produkChekout,
+      iduser: user.idUser,
+      idPemesanan: id,
+      alamatPengiriman: valueAlamat,
+      jasaPengiriman: valueJasa,
+      biayaLayanan,
+      totalPembayaran
+    }
+
+    if (valueAlamat !== '' && valueJasa !== '') {
+      produkChekout.barang?.map(async function barangChekout (data, i) {
+        const { error, produk } = await getProduk(data.idBarang)
+        if (!error) {
+          const countTerjual = produk.terjual + data.jumlah
+          const updateTerjual = await saveProdukTemp({ ...produk, terjual: countTerjual })
+        }
+      })
+      const result = await savePesanan({ ...pesanan })
+      Swal.fire('Berhasil', 'Pesanan berhasil dibuat!', 'success').then(navigate('/'))
+    } else if (valueAlamat === '' && valueJasa !== '') {
+      Swal.fire('Gagal', 'Alamat tidak boleh kosong!', 'error')
+    } else if (valueAlamat !== '' && valueJasa === '') {
+      Swal.fire('Gagal', 'Harap pilih jasa pengiriman!', 'error')
+    } else if (valueAlamat === '' && valueJasa === '') {
+      Swal.fire('Gagal', 'Data belum lengkap, periksa kembali!', 'error')
+    }
+  }
+
+  useEffect(() => {
+    getDataCheckout()
+  }, [])
+
   return (
     <div>
-        <NavBarLogin logoutHandler={onLogout}/>
-        <h1>Beli Sekarang</h1>
-        <div className="col-container">
-            <img src="" alt="" />
-            <h2>Craftivity</h2>
-            <h3>Jakarta Barat</h3>
+      <NavBarLogin logoutHandler={onLogout} />
+      <Loading visible={loading} />
+      <div className="container mt-4 mb-5">
+        <h2>Beli sekarang</h2>
+        <h6>Periksa belanjaan anda disini sebelum melakukan pembayaran!</h6>
+        <div>
+          {
+            produkChekout === null
+              ? ''
+              : produkChekout.barang?.map((data, i) => (
+              <ItemBarang
+                key={i}
+                data={data}
+                jumlah={data.jumlah}
+                totalHarga={data.totalHarga}
+                {...data}
+              />
+              ))
+          }
         </div>
-
-        <div className="col-container-2">
-            <a href="">ℹ️</a>
-            <img src="" alt="" />
-            <h2>Lorem Ipsum</h2>
-                <div className="btn-group">
-                    <button type="button" class="btn btn-secondary"><b>-</b></button>
-                    <button type="button" class="btn btn-secondary">2</button>
-                    <button type="button" class="btn btn-secondary"><b>+</b></button>
-                </div>
-            <div className="col-container-text">
-                <h2>Rp. 100.000</h2>
-                <p>x2</p>
+        <div className="row">
+          <div className="col">
+              <div className="card mt-4">
+              <div className="card-header">Alamat Tujuan</div>
+              <div className="card-body">
+                {
+                  user.alamat === '' ? <Link to='/profile/alamat'>Buat Alamat</Link> : <Select options={options} onChange={handleSelectAlamat}/>
+                }
+              </div>
             </div>
-        </div>
-
-        <div className="col-container-main">
-            <div className="col-container-m1">
-                <p>Proteksi Barang</p>
-                <p>Rp. 1.0000 <span>x2</span></p>
-            </div>
-            <div className="col-container-m2">
-                <input type="checkbox"/>
-            </div>
-        </div>
-
-        <div className="col-container-3">
-            <div className="text-icon">
-                <img src="" alt="" />
-            </div>
-            <div className="text-content">
-                <h1>Mau Kirim Kemana ?</h1>
-                <h5>Jl. Batik Kumeli No.50, Sukaluyu,
-                    Kec. Cibeunying Kaler, Kota Bandung, Jawa Barat 40123
-                </h5>
-            </div>
-        </div>
-
-        <div className="col-container-4">
-            <div className="text-icon">
-                <img src="" alt="" />
-            </div>
-            <div className="text-content">
-                <h1>Opsi Pengiriman</h1>
-                <div class="dropdown">
-                    <button class="btn-dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Reguler
-                    </button>
-                    <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Kargo</a>
-                    <a class="dropdown-item" href="#">Nextday</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div className="card-custom-invoice">
+          </div>
+          <div className="col">
+            <div className="card mt-4">
+            <div className="card-header">Opsi Pengiriman</div>
             <div className="card-body">
-                <h5><b>Detail Pembayaran</b></h5><br/>
-                    <p>Subtotal Produk <span><b>Rp. 100.000</b></span></p>
-                    <p>Subtotal Pengiriman <span><b>Rp.11.000</b></span></p>
-                    <p>Subtotal Pelayanan <span><b>Rp.1.000</b></span></p>
-                        <div className="text-card">
-                            <span>Total SPembayaran</span>
-                            <h3>Rp. 112.000</h3>
-                        </div>
-                <ButtonCheckout/>
+              <Select options={optionsPengiriman} onChange={handleSelectJasa}/>
             </div>
+          </div>
+          </div>
         </div>
-        <Footer/>
+        <div className="card mt-4">
+          <div className="card-header">Detail Pembayaran</div>
+          <div className="card-body">
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <th scope="row">Subtotal Produk</th>
+                  <td>Rp.{parseInt(produkChekout.totalHargaAll)}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Subtotal Pengiriman</th>
+                  <td>Rp.{hargaJasa}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Biaya Layanan</th>
+                  <td>Rp.{biayaLayanan}</td>
+                </tr>
+                <tr>
+                  <th scope='row'><h4 className='text-danger'><b>Total Pembayaran</b></h4></th>
+                  <td><h4 className='text-danger'><b>Rp.{totalPembayaran}</b></h4></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+          <div className="row justify-content-center mt-3">
+            <ButtonKembali onNavigate={kembaliChekout}/>
+            <div className='mr-3'></div>
+            <ButtonPesan onBuatPesan={buatPesanan}/>
+          </div>
+      </div>
+      <Footer />
     </div>
   )
 }

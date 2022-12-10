@@ -1,9 +1,21 @@
 import '../Button/button.css'
 import { FaTrash } from 'react-icons/fa'
 
-function ButtonBeli () {
+function ButtonBeli ({ onBeliSekarang }) {
   return (
-    <button className="button-beli">Beli Sekarang</button>
+    <button className="button-beli" onClick={() => { onBeliSekarang() }}>Beli Sekarang</button>
+  )
+}
+
+function ButtonPesan ({ onBuatPesan }) {
+  return (
+    <button className="button-pesan" onClick={() => { onBuatPesan() }}>Pesan Sekarang</button>
+  )
+}
+
+function ButtonKembali ({ onNavigate }) {
+  return (
+    <button className="button-hapus" onClick={onNavigate}>Kembali</button>
   )
 }
 
@@ -37,4 +49,4 @@ function ButtonEdit ({ onDelete, idKeranjang }) {
   )
 }
 
-export { ButtonBeli, ButtonKeranjang, ButtonCari, ButtonCheckout, ButtonHapus, ButtonEdit }
+export { ButtonBeli, ButtonKeranjang, ButtonCari, ButtonCheckout, ButtonHapus, ButtonEdit, ButtonPesan, ButtonKembali }

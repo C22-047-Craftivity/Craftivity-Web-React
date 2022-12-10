@@ -9,12 +9,13 @@ import CountDetail from '../../components/Detail/count-detail'
 import { ButtonBeli, ButtonKeranjang } from '../../components/Button'
 import StarWidget from '../../components/Star'
 import ReviewItem from '../../components/Review/review-item'
-import { useParams } from 'react-router-dom'
-import { getMitra, getProduk, getUserById, saveUserData } from '../../confiq/firebase'
+import { useNavigate, useParams } from 'react-router-dom'
+import { getMitra, getProduk, getUserById, saveCheckout, saveUserData } from '../../confiq/firebase'
 import Loading from '../../components/Loading'
 import EmptyList from '../../assets/emptyList.png'
 import Swal from 'sweetalert2'
 import CONFIQ from '../../confiq/confiq'
+import moment from 'moment'
 
 function Index ({ onLogout }) {
   const [jumlah, setJumlah] = useState(1)
@@ -24,6 +25,7 @@ function Index ({ onLogout }) {
   const [totalHarga, setTotal] = useState(produk.harga)
   const [mitra, setMitra] = useState([])
   const [user, setUser] = useState([])
+  const navigate = useNavigate()
   const [like, setlike] = useState(true)
   const [unLike, setUnLike] = useState(true)
 
@@ -56,6 +58,9 @@ function Index ({ onLogout }) {
     const dataKeranjang = {
       idKeranjang: +new Date(),
       idBarang: id,
+      idMitra: produk.idMitra,
+      gambarBrg: produk.gambarBrg,
+      nama: produk.nama,
       jumlah,
       totalHarga
     }
@@ -73,6 +78,28 @@ function Index ({ onLogout }) {
     )
   }
 
+  async function beliSekarang () {
+    const dataBarang = {
+      idBarang: produk.idBrg,
+      idMitra: produk.idMitra,
+      gambarBrg: produk.gambarBrg,
+      nama: produk.nama,
+      jumlah,
+      totalHarga
+    }
+
+    const dataProdukCheckout = {
+      idPemesanan: +new Date(),
+      idUser: localStorage.getItem(CONFIQ.authUser),
+      barang: [dataBarang],
+      totalItemAll: jumlah,
+      totalHargaAll: totalHarga,
+      tanggalPemesanan: moment().format('DD MMM YYYY')
+    }
+    const result = await saveCheckout({ ...dataProdukCheckout })
+    navigate(`/pembayaran/${dataProdukCheckout.idPemesanan}`)
+  }
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -81,6 +108,7 @@ function Index ({ onLogout }) {
     })
     getProdukById()
     getDataUser()
+    console.log(produk)
   }, [id])
 
   function likeHandler () {
@@ -133,7 +161,7 @@ function Index ({ onLogout }) {
           </div>
           <div className="row mt-5 d-flex justify-content-around">
             <ButtonKeranjang onTambahKeranjang={TambahKeranjang}/>
-            <ButtonBeli />
+            <ButtonBeli onBeliSekarang={beliSekarang}/>
           </div>
         </div>
       </div>
