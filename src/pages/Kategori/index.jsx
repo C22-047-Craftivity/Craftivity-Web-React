@@ -12,6 +12,11 @@ export default function Index ({ onLogout }) {
   const [produk, setProduk] = useState([])
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
     async function getProduk () {
       setLoading(true)
       const { error, AllProduk } = await getAllProduk()
