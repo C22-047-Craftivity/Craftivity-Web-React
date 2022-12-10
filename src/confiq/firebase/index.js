@@ -357,7 +357,7 @@ export function saveCheckout ({ idPemesanan, idUser, barang, totalHargaAll, tota
 }
 
 export function savePesanan ({ checkout, iduser, idPemesanan, alamatPengiriman, jasaPengiriman, biayaLayanan, totalPembayaran }) {
-  set(ref(database, 'Pemesanan/' + iduser), {
+  set(ref(database, 'Pemesanan/' + idPemesanan), {
     checkout,
     iduser,
     idPemesanan,
