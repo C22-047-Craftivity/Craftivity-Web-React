@@ -9,8 +9,8 @@ import CountDetail from '../../components/Detail/count-detail'
 import { ButtonBeli, ButtonKeranjang } from '../../components/Button'
 import StarWidget from '../../components/Star'
 import ReviewItem from '../../components/Review/review-item'
-import { useParams } from 'react-router-dom'
-import { getMitra, getProduk, getUserById, saveUserData } from '../../confiq/firebase'
+import { useNavigate, useParams } from 'react-router-dom'
+import { getMitra, getProduk, getUserById, saveCheckout, saveUserData } from '../../confiq/firebase'
 import Loading from '../../components/Loading'
 import EmptyList from '../../assets/emptyList.png'
 import Swal from 'sweetalert2'
@@ -24,6 +24,7 @@ function Index ({ onLogout }) {
   const [totalHarga, setTotal] = useState(produk.harga)
   const [mitra, setMitra] = useState([])
   const [user, setUser] = useState([])
+  const navigate = useNavigate()
   const [like, setlike] = useState(true)
   const [unLike, setUnLike] = useState(true)
 
@@ -71,6 +72,26 @@ function Index ({ onLogout }) {
         <h6><b>Reviews tidak ditemukan!</b></h6>
       </center>
     )
+  }
+
+  async function beliSekarang () {
+    const dataBarang = {
+      idBarang: produk.idBrg,
+      jumlah,
+      totalHarga
+    }
+
+    const dataProdukCheckout = {
+      idPemesanan: +new Date(),
+      idUser: localStorage.getItem(CONFIQ.authUser),
+      barang: [dataBarang],
+      totalItemAll: jumlah,
+      totalHargaAll: totalHarga,
+      tanggalPemesanan: +new Date(),
+      statusPemesanan: 'Menunggu Pembayaran'
+    }
+    const result = await saveCheckout({ ...dataProdukCheckout })
+    navigate(`/pembayaran/${dataProdukCheckout.idPemesanan}`)
   }
 
   useEffect(() => {
@@ -133,7 +154,7 @@ function Index ({ onLogout }) {
           </div>
           <div className="row mt-5 d-flex justify-content-around">
             <ButtonKeranjang onTambahKeranjang={TambahKeranjang}/>
-            <ButtonBeli />
+            <ButtonBeli onBeliSekarang={beliSekarang}/>
           </div>
         </div>
       </div>

@@ -119,7 +119,6 @@ function Index () {
         <Route path="/" element={<HomePage onLogout={onLogout}/>} />
         <Route path="/login" element={<LoginUserPage />} />
         <Route path="/detail/:id" element={<DetailPage onLogout={onLogout}/>} />
-        <Route path="/pembayaran/:id" element={<ChekoutPage onLogout={onLogout}/>} />
         <Route path="profile" element={<ProfileUserPage onLogout={onLogout}/>}>
           <Route path="edit_profile" element={<EditProfilePage/>}/>
           <Route path="alamat" element={<AlamatPage/>}/>
@@ -129,6 +128,7 @@ function Index () {
         <Route path="/favorite" element={<Favorit onLogout={onLogout}/>}/>
         <Route path="/kategori/:id" element={<Kategori onLogout={onLogout} />}/>
         <Route path="/:keyword" element={<Pencarian onLogout={onLogout} />}/>
+        <Route path="/pembayaran/:id" element={<ChekoutPage onLogout={onLogout}/>} />
       </Routes>
   )
 }
