@@ -51,8 +51,7 @@ function Index ({ onLogout }) {
       barang: user.keranjang,
       totalItemAll,
       totalHargaAll,
-      tanggalPemesanan: +new Date(),
-      statusPemesanan: 'Menunggu Pembayaran'
+      tanggalPemesanan: +new Date()
     }
     const result = await saveCheckout({ ...dataProdukCheckout })
     navigate(`/pembayaran/${dataProdukCheckout.idPemesanan}`)
