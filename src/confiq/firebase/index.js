@@ -345,15 +345,14 @@ export function getCheckout (idPemesanan) {
   )
 }
 
-export function saveCheckout ({ idPemesanan, idUser, barang, totalHargaAll, totalItemAll, tanggalPemesanan, statusPemesanan }) {
+export function saveCheckout ({ idPemesanan, idUser, barang, totalHargaAll, totalItemAll, tanggalPemesanan }) {
   set(ref(database, 'Checkout/' + idPemesanan), {
     idPemesanan,
     idUser,
     barang,
     totalHargaAll,
     totalItemAll,
-    tanggalPemesanan,
-    statusPemesanan
+    tanggalPemesanan
   })
 }
 
