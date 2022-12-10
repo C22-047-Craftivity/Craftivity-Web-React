@@ -117,7 +117,6 @@ function Index () {
         <Route path="/" element={<HomePage onLogout={onLogout}/>} />
         <Route path="/login" element={<LoginUserPage />} />
         <Route path="/detail/:id" element={<DetailPage onLogout={onLogout}/>} />
-        <Route path="/pembayaran/:id" element={<ChekoutPage onLogout={onLogout}/>} />
         <Route path="profile" element={<ProfileUserPage onLogout={onLogout}/>}>
           <Route path="edit_profile" element={<EditProfilePage/>}/>
           <Route path="alamat" element={<AlamatPage/>}/>
@@ -126,6 +125,7 @@ function Index () {
           <Route path="ubah_password" element={<UbahPasswordPage />}/>
         </Route>
         <Route path="/keranjang" element={<KeranjangPage onLogout={onLogout}/>}/>
+        <Route path="/pembayaran/:id" element={<ChekoutPage onLogout={onLogout}/>} />
       </Routes>
   )
 }

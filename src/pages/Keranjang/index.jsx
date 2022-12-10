@@ -8,15 +8,15 @@ import NavBarLogin from '../../components/NavBarLogin'
 import Loading from '../../components/Loading'
 import EmptyList from '../../assets/LoginVektorUser.png'
 import { useEffect, useState } from 'react'
-import { getUserById, saveUserData } from '../../confiq/firebase'
+import { getUserById, saveCheckout, saveUserData } from '../../confiq/firebase'
 import CONFIQ from '../../confiq/confiq'
 import { useNavigate } from 'react-router-dom'
 
 function Index ({ onLogout }) {
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState([])
-  const [totalItemAll, setTotalItem] = useState()
-  const [totalHargaAll, setTotalHarga] = useState()
+  const [totalItemAll, setTotalItem] = useState(0)
+  const [totalHargaAll, setTotalHarga] = useState(0)
   const navigate = useNavigate()
 
   async function getDataUser () {
@@ -44,8 +44,18 @@ function Index ({ onLogout }) {
     )
   }
 
-  function checkout () {
-    navigate(`/pembayaran/${124234}`)
+  async function checkout () {
+    const dataProdukCheckout = {
+      idPemesanan: +new Date(),
+      idUser: localStorage.getItem(CONFIQ.authUser),
+      barang: user.keranjang,
+      totalItemAll,
+      totalHargaAll,
+      tanggalPemesanan: +new Date(),
+      statusPemesanan: 'Menunggu Pembayaran'
+    }
+    const result = await saveCheckout({ ...dataProdukCheckout })
+    navigate(`/pembayaran/${dataProdukCheckout.idPemesanan}`)
   }
 
   useEffect(() => {

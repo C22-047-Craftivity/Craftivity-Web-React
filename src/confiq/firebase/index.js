@@ -329,3 +329,41 @@ export function getProduk (idBarang) {
       })
   )
 }
+
+export function getCheckout (idPemesanan) {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/Checkout/' + idPemesanan))
+      .then((snapshot) => {
+        const data = snapshot.val()
+        return { checkout: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      }
+      )
+  )
+}
+
+export function saveCheckout ({ idPemesanan, idUser, barang, totalHargaAll, totalItemAll, tanggalPemesanan, statusPemesanan }) {
+  set(ref(database, 'Checkout/' + idPemesanan), {
+    idPemesanan,
+    idUser,
+    barang,
+    totalHargaAll,
+    totalItemAll,
+    tanggalPemesanan,
+    statusPemesanan
+  })
+}
+
+export function savePesanan ({ checkout, idPemesanan, alamatPengiriman, jasaPengiriman, biayaLayanan, totalPembayaran }) {
+  set(ref(database, 'Pemesanan/' + idPemesanan), {
+    checkout,
+    idPemesanan,
+    alamatPengiriman,
+    jasaPengiriman,
+    biayaLayanan,
+    totalPembayaran
+  })
+}
