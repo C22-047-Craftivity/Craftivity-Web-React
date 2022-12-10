@@ -1,0 +1,16 @@
+.item-kategori img{
+    border-radius: 100px;
+    width: 131px;
+    height: 131px;
+    object-fit: cover;
+}
+
+.item-kategori p{
+    align-items: center;
+    margin-top: 10px;
+    color: #212529;
+}
+
+.container-kategori{
+    padding: 20px;
+}

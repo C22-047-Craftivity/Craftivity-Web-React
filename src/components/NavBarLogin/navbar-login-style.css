@@ -1,0 +1,100 @@
+.bg-custom{
+    background: rgb(253,178,72);
+    background: linear-gradient(180deg, rgba(253,178,72,1) 0%, rgba(255,192,69,1) 80%, rgba(255,196,68,0) 100%);
+}
+
+.input-group{
+    padding: 10px;
+}
+
+.search-input-custom{
+    border: 0 !important;
+    border-radius: 50px 0 0 50px !important;
+    padding-left: 30px !important;
+}
+
+.btn-search{
+    display: flex;
+    align-items: center;
+    border-radius: 0 50px 50px 0 !important;
+    border: 0 !important;
+    background-color: white !important;
+    padding-right: 10px;
+    font-size: 25px;
+}
+
+.btn-search:active{
+    font-size: 23px;
+}
+
+.circle-button{
+    display: block;
+    position: relative;
+    background-color: white;
+    padding: 0.7em;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    transition: 0.3s;
+}
+
+.circle-button img{
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    border: 0;
+    transform: translate(-50%, -50%);
+    width: 20px;
+}
+
+.profile-image-button{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    transition: 0.3s;
+
+}
+
+.profile-image-button:hover{
+    box-shadow: 0 6px 10px rgba(255, 255, 255, 1);
+}
+
+.profile-image-button a::sele{
+    box-shadow: 0 6px 10px rgba(255, 255, 255, 1);
+
+}
+
+.circle-button:hover{
+    box-shadow: 0 6px 10px rgba(255, 255, 255, 1);
+}
+
+.square-button{
+    display: block;
+    position: relative;
+    background-color: white;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    border: 0;
+    transition: 0.3s;
+    color: #F4A274;
+}
+
+.square-button h4{
+    text-align: center;
+    padding-top: 9px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.square-button:hover{
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 1);
+    color: white;
+    background-color: #F4A274 ;
+}
+
+.button-logout{
+    color: red;
+}

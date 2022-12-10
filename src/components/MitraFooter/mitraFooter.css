@@ -1,0 +1,28 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.footerMitra {
+    background: #201F1F;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.footerMitra .title {
+    margin: 0px;
+    font-size: 20px;
+    color: white;
+}
+
+.sosialMedia {
+    color: white;
+    display: flex;
+    gap: 10px;
+    font-size: 20px;
+}

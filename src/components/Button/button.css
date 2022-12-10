@@ -1,0 +1,107 @@
+.button-keranjang{
+    display: inline-block;
+    border: 1px solid #FA984D;
+    padding: 15px 30px;
+    border-radius: 30px;
+    background-color: white;
+    font-weight: bold;
+    color: #FA984D;
+    transition: 0.3s;
+}
+
+.button-keranjang:hover{
+    box-shadow: 0px 10px 17px 0px #FA984D;
+}
+
+.button-beli{
+    display: inline-block;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    background-color: #FA984D;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+}
+
+.button-beli:hover{
+    box-shadow: 0px 10px 17px 0px #FA984D;
+}
+
+.button-pesan{
+    display: inline-block;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 15px;
+    background-color: #FA984D;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+}
+
+.button-pesan:hover{
+    box-shadow: 0px 10px 17px 0px #FA984D;
+}
+
+.button-cari{
+    display: inline-block;
+    border: none;
+    margin-top: 5px;
+    padding: 8px 25px;
+    border-radius: 30px;
+    background-color: #FA984D;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+}
+
+.button-cari:hover{
+    box-shadow: 0px 5px 17px 0px #FA984D;
+}
+
+.button-checkout{
+    display: inline-block;
+    border: none;
+    margin-top: 15px;
+    padding: 10px 30px;
+    border-radius: 30px;
+    background-color: #FA984D;
+    font-weight: bold;
+    width: 100%;
+    color: white;
+    transition: 0.3s;
+}
+
+.button-checkout:hover{
+    box-shadow: 0px 5px 17px 0px #FA984D;
+}
+
+.button-hapus{
+    display: inline-block;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 15px;
+    background-color:#F08181;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+}
+
+.button-hapus:hover{
+    box-shadow: 0px 5px 17px 0px #F08181;
+}
+
+.button-edit{
+    display: inline-block;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 15px;
+    background-color:#FA984D;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+}
+
+.button-edit:hover{
+    box-shadow: 0px 5px 17px 0px #FA984D;
+}
