@@ -22,6 +22,7 @@ import MenuMitra from '../components/MitraMenu'
 import ProfilMitra from '../pages/ProfilMitra'
 import ListBarangMitra from '../pages/ListBarangMitra'
 import DetailBarangMitra from '../pages/DetailBarangMitra'
+import DashboardMitra from '../pages/DashboardMitra'
 import FooterMitra from '../components/MitraFooter'
 import ChekoutPage from '../pages/InvoicePembayaran'
 
@@ -101,7 +102,7 @@ function Index () {
             </div>
             <div className='col-sm-9 col-10'>
               <Routes>
-                {/* <Route path="/" element={<DetailPage />} /> */}
+                <Route path="/" element={<DashboardMitra />} />
                 <Route path="/profil" element={<ProfilMitra />} />
                 <Route path="/list-barang" element={<ListBarangMitra />} />
                 <Route path="/detail/:idBrg" element={<DetailBarangMitra />} />

@@ -59,6 +59,8 @@ function Index ({ onLogout }) {
       idKeranjang: +new Date(),
       idBarang: id,
       idMitra: produk.idMitra,
+      gambarBrg: produk.gambarBrg,
+      nama: produk.nama,
       jumlah,
       totalHarga
     }
@@ -80,6 +82,8 @@ function Index ({ onLogout }) {
     const dataBarang = {
       idBarang: produk.idBrg,
       idMitra: produk.idMitra,
+      gambarBrg: produk.gambarBrg,
+      nama: produk.nama,
       jumlah,
       totalHarga
     }
