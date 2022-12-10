@@ -13,10 +13,18 @@
     padding-left: 30px !important;
 }
 
-.search-icon-custom-nav{
+.btn-search{
+    display: flex;
+    align-items: center;
     border-radius: 0 50px 50px 0 !important;
     border: 0 !important;
     background-color: white !important;
+    padding-right: 10px;
+    font-size: 25px;
+}
+
+.btn-search:active{
+    font-size: 23px;
 }
 
 .circle-button{

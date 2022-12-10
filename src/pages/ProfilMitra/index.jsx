@@ -7,8 +7,8 @@ import './profilMitra.css'
 
 export default function Index () {
   const [mitra, setMitra] = useState([])
-  const [namaToko, setNamaToko] = useState([])
-  const [kota, setKota] = useState([])
+  const [namaToko, setNamaToko] = useState('')
+  const [kota, setKota] = useState('')
   const [loading, setLoading] = useState(false)
   const [readOnly, setReadOnly] = useState(true)
   const avatar = useRef()

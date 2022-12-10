@@ -368,21 +368,6 @@ export function savePesanan ({ checkout, iduser, idPemesanan, alamatPengiriman, 
   })
 }
 
-export function getDataPemesanan (idUser) {
-  const dbref = ref(database)
-  return (
-    get(child(dbref, '/Pemesanan/' + idUser))
-      .then((snapshot) => {
-        const data = snapshot.val()
-        return { dataPemesanan: data }
-      })
-      .catch((error) => {
-        console.error(error)
-      }
-      )
-  )
-}
-
 export function getAllPemesanan () {
   const dbref = ref(database)
   return (
@@ -394,7 +379,7 @@ export function getAllPemesanan () {
           const childData = childSnapshot.val()
           data.push(childData)
         })
-        return { dataPemesanan: data }
+        return { error: false, dataPemesanan: data }
       })
       .catch((error) => {
         console.error(error)

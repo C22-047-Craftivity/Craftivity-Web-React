@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import useInput from '../../hooks/useInput'
 import { BiSearchAlt } from 'react-icons/bi'
-import { Link } from 'react-router-dom'
 import '../NavBarLogin/navbar-login-style.css'
 import FavoriteIcon from '../../assets/Favorite.svg'
 import CartIcon from '../../assets/Cart.svg'
@@ -10,6 +11,8 @@ import Swal from 'sweetalert2'
 
 function NavBarLogin ({ logoutHandler }) {
   const [user, setUser] = useState([])
+  const [keyword, setKeyword] = useInput('')
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function getDataUserById () {
@@ -34,6 +37,14 @@ function NavBarLogin ({ logoutHandler }) {
       })
   }
 
+  function btnSearch () {
+    if (keyword === '') {
+      document.getElementById('search').focus()
+    } else {
+      navigate(`/${keyword}`)
+    }
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-custom">
       <Link to="/" className="navbar-brand p-3 font-weight-bold">
@@ -55,15 +66,18 @@ function NavBarLogin ({ logoutHandler }) {
         <div className="ml-auto col-lg-8">
           <div className="input-group">
             <input
+              id='search'
+              value={keyword}
+              onChange={setKeyword}
               type="text"
-              placeholder="Kalung, Bandung..."
+              placeholder="Temukan produk yang kamu cari disini!"
               className="form-control search-input-custom"
               aria-label="Search Input"
             />
             <div className="input-group-append">
-              <span className="input-group-text search-icon-custom-nav">
-                <BiSearchAlt style={{ width: 20 }} />
-              </span>
+              <button type='button' className="btn-search" onClick={btnSearch} >
+                <BiSearchAlt />
+              </button>
             </div>
           </div>
         </div>
@@ -78,7 +92,7 @@ function NavBarLogin ({ logoutHandler }) {
               <img src={CartIcon} alt="" />
             </Link>
           </li>
-          <li class="nav-item dropdown mr-3">
+          <li className="nav-item dropdown mr-3">
             <a
               href="#"
               role="button"
@@ -87,11 +101,11 @@ function NavBarLogin ({ logoutHandler }) {
             >
               <img src={user.profilePicture} alt="" className='profile-image-button'/>
             </a>
-            <div class="dropdown-menu dropdown-menu-right mt-3">
+            <div className="dropdown-menu dropdown-menu-right mt-3">
               <Link to="/profile/edit_profile" className="dropdown-item">
                 Atur Profile
               </Link>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
               <Link className="dropdown-item" onClick={logout}>
                 <span className='button-logout'>Logout</span>
               </Link>

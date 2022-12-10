@@ -1,31 +1,15 @@
-import { useState, useEffect } from 'react'
 import '../ItemBarang/itembarang.css'
-import { getProduk, getUserById } from '../../confiq/firebase'
-import CONFIQ from '../../confiq/confiq'
 
-function Index ({ data, jumlah, totalHarga }) {
-  const [produk, setProduk] = useState({})
-
-  async function getProdukById () {
-    const { error, produk } = await getProduk(data.idBarang)
-    if (!error) {
-      setProduk(produk)
-    }
-  }
-
-  useEffect(() => {
-    getProdukById()
-  }, [])
-
+function Index ({ data, jumlah, totalHarga, gambarBrg, nama }) {
   return (
     <div className="row align-items-center mt-3 card-product-keranjang m-0">
       <div className="col-5">
         <div className="row align-items-center">
             <div className="col-5">
-            <img className="image-product-keranjang" width={100} src={produk.gambarBrg} alt="" />
+            <img className="image-product-keranjang" width={100} src={gambarBrg} alt="" />
             </div>
             <div className="col">
-                <h6><b>{produk.nama}</b></h6>
+                <h6><b>{nama}</b></h6>
                 {/* <span>{produk.toko.name}</span> */}
             </div>
         </div>

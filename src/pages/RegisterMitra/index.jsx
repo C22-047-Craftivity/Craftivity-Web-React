@@ -56,6 +56,7 @@ function Index () {
         navigate('/loginMitra')
       }
       setLoading(false)
+      window.location.reload()
     } else {
       Swal.fire('Gagal', 'Password tidak sesuai', 'error')
     }
@@ -87,7 +88,7 @@ function Index () {
             <button type='submit' className='btn-daftar'>DAFTAR</button>
           </form>
           <div className="text-center">
-              <p>Sudah punya akun? masuk sekarang <Link to="/"><u>di sini</u></Link></p>
+              <p>Sudah punya akun? masuk sekarang <Link to="/loginMitra"><u>di sini</u></Link></p>
           </div>
       </div>
     </div>

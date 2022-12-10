@@ -8,18 +8,21 @@ import LoginMitraPage from '../pages/LoginMitra'
 import RegisterMitraPage from '../pages/RegisterMitra'
 import DetailPage from '../pages/Detail'
 import KeranjangPage from '../pages/Keranjang'
+import Kategori from '../pages/Kategori'
+import Pencarian from '../pages/Pencarian'
+import Favorit from '../pages/Favorit'
 import Swal from 'sweetalert2'
 import HomePage from '../pages/HomePage'
 import ProfileUserPage from '../pages/ProfileUser'
 import EditProfilePage from '../pages/ProfileUser/edit_profile'
 import AlamatPage from '../pages/ProfileUser/alamat'
 import LihatPesananPage from '../pages/ProfileUser/lihat_pesanan'
-import FavoritePage from '../pages/ProfileUser/favorite'
-import UbahPasswordPage from '../pages/ProfileUser/ubah_password'
 import HeaderMitra from '../components/MitraHeader'
 import MenuMitra from '../components/MitraMenu'
 import ProfilMitra from '../pages/ProfilMitra'
 import ListBarangMitra from '../pages/ListBarangMitra'
+import DetailBarangMitra from '../pages/DetailBarangMitra'
+import DashboardMitra from '../pages/DashboardMitra'
 import FooterMitra from '../components/MitraFooter'
 import ChekoutPage from '../pages/InvoicePembayaran'
 
@@ -99,10 +102,10 @@ function Index () {
             </div>
             <div className='col-sm-9 col-10'>
               <Routes>
-                <Route path="/detail" element={<DetailPage />} />
+                <Route path="/" element={<DashboardMitra />} />
                 <Route path="/profil" element={<ProfilMitra />} />
                 <Route path="/list-barang" element={<ListBarangMitra />} />
-                <Route path="/forum" element={<DetailPage />} />
+                <Route path="/detail/:idBrg" element={<DetailBarangMitra />} />
               </Routes>
             </div>
           </div>
@@ -121,10 +124,11 @@ function Index () {
           <Route path="edit_profile" element={<EditProfilePage/>}/>
           <Route path="alamat" element={<AlamatPage/>}/>
           <Route path="pesanan" element={<LihatPesananPage />}/>
-          <Route path="list_favorite" element={<FavoritePage />}/>
-          <Route path="ubah_password" element={<UbahPasswordPage />}/>
         </Route>
         <Route path="/keranjang" element={<KeranjangPage onLogout={onLogout}/>}/>
+        <Route path="/favorite" element={<Favorit onLogout={onLogout}/>}/>
+        <Route path="/kategori/:id" element={<Kategori onLogout={onLogout} />}/>
+        <Route path="/:keyword" element={<Pencarian onLogout={onLogout} />}/>
         <Route path="/pembayaran/:id" element={<ChekoutPage onLogout={onLogout}/>} />
       </Routes>
   )

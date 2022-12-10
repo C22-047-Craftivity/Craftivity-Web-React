@@ -30,12 +30,6 @@ function Index ({ logoutHandler, url }) {
         <NavLink to="pesanan" style={{ textDecoration: 'none' }} className={({ isActive }) => 'btn-menu-user' + (!isActive ? '' : ' active')}>
           <MdBookmark className='mr-3'/>Lihat Pesanan
         </NavLink>
-        <NavLink to="list_favorite" style={{ textDecoration: 'none' }} className={({ isActive }) => 'btn-menu-user' + (!isActive ? '' : ' active')}>
-          <MdFavorite className='mr-3'/>Favorite Kamu
-        </NavLink>
-        <NavLink to="ubah_password" style={{ textDecoration: 'none' }} className={({ isActive }) => 'btn-menu-user' + (!isActive ? '' : ' active')}>
-          <MdVpnKey className='mr-3'/>Ubah Password
-        </NavLink>
         <button className='btn-keluar' onClick={logout}><MdLogout className='mr-3'/>Keluar</button>
       </div>
     </div>

@@ -1,11 +1,13 @@
+import { Link } from 'react-router-dom'
+
 function TerlarisItem ({ terlaris }) {
   return (
     <div className="col">
-        <div style={{ backgroundImage: `url(${terlaris.src})` }} className="card card-terlaris shadow-lg border-0 ">
+        <Link to={`/detail/${terlaris.idBrg}`} style={{ backgroundImage: `url(${terlaris.gambarBrg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', textDecoration: 'none' }} className="card card-terlaris shadow-lg border-0 ">
             <div className="card-body-terlaris">
-                <p className="font-weight-bold">{terlaris.name}</p>
+                <p className="text-dark font-weight-bold">{terlaris.nama}</p>
             </div>
-        </div>
+        </Link>
     </div>
   )
 }
