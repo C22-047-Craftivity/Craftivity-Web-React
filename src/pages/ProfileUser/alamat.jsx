@@ -84,7 +84,7 @@ function AlamatPage ({ titlePage, subtitlePage }) {
   }
 
   return (
-    <div className='card shadow-lg border-0'>
+    <div className='card shadow border-0'>
       <Loading visible={loading} />
       <div className="card-body">
         <div className="mb-4">

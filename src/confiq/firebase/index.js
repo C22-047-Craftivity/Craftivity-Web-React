@@ -345,25 +345,59 @@ export function getCheckout (idPemesanan) {
   )
 }
 
-export function saveCheckout ({ idPemesanan, idUser, barang, totalHargaAll, totalItemAll, tanggalPemesanan, statusPemesanan }) {
+export function saveCheckout ({ idPemesanan, idUser, barang, totalHargaAll, totalItemAll, tanggalPemesanan }) {
   set(ref(database, 'Checkout/' + idPemesanan), {
     idPemesanan,
     idUser,
     barang,
     totalHargaAll,
     totalItemAll,
-    tanggalPemesanan,
-    statusPemesanan
+    tanggalPemesanan
   })
 }
 
-export function savePesanan ({ checkout, idPemesanan, alamatPengiriman, jasaPengiriman, biayaLayanan, totalPembayaran }) {
-  set(ref(database, 'Pemesanan/' + idPemesanan), {
+export function savePesanan ({ checkout, iduser, idPemesanan, alamatPengiriman, jasaPengiriman, biayaLayanan, totalPembayaran }) {
+  set(ref(database, 'Pemesanan/' + iduser), {
     checkout,
+    iduser,
     idPemesanan,
     alamatPengiriman,
     jasaPengiriman,
     biayaLayanan,
     totalPembayaran
   })
+}
+
+export function getDataPemesanan (idUser) {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/Pemesanan/' + idUser))
+      .then((snapshot) => {
+        const data = snapshot.val()
+        return { dataPemesanan: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      }
+      )
+  )
+}
+
+export function getAllPemesanan () {
+  const dbref = ref(database)
+  return (
+    get(child(dbref, '/Pemesanan'))
+      .then((snapshot) => {
+        const data = []
+        snapshot.forEach((childSnapshot) => {
+          const childKey = childSnapshot.key
+          const childData = childSnapshot.val()
+          data.push(childData)
+        })
+        return { dataPemesanan: data }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  )
 }
