@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 import { getUserById, saveCheckout, saveUserData } from '../../confiq/firebase'
 import CONFIQ from '../../confiq/confiq'
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
 function Index ({ onLogout }) {
   const [loading, setLoading] = useState(false)
@@ -51,7 +52,7 @@ function Index ({ onLogout }) {
       barang: user.keranjang,
       totalItemAll,
       totalHargaAll,
-      tanggalPemesanan: +new Date()
+      tanggalPemesanan: moment().format('DD MMM YYYY')
     }
     const result = await saveCheckout({ ...dataProdukCheckout })
     navigate(`/pembayaran/${dataProdukCheckout.idPemesanan}`)

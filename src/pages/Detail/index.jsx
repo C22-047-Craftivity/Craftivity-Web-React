@@ -16,6 +16,7 @@ import Loading from '../../components/Loading'
 import EmptyList from '../../assets/emptyList.png'
 import Swal from 'sweetalert2'
 import CONFIQ from '../../confiq/confiq'
+import moment from 'moment'
 
 function Index ({ onLogout }) {
   const [jumlah, setJumlah] = useState(1)
@@ -80,7 +81,7 @@ function Index ({ onLogout }) {
       barang: [dataBarang],
       totalItemAll: jumlah,
       totalHargaAll: totalHarga,
-      tanggalPemesanan: +new Date()
+      tanggalPemesanan: moment().format('DD MMM YYYY')
     }
     const result = await saveCheckout({ ...dataProdukCheckout })
     navigate(`/pembayaran/${dataProdukCheckout.idPemesanan}`)
