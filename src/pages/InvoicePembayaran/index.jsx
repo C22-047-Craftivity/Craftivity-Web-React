@@ -2,8 +2,8 @@ import NavBarLogin from '../../components/NavBarLogin'
 import Footer from '../../components/Footer'
 import '../InvoicePembayaran/invoicePembayaran.css'
 import { useState, useEffect } from 'react'
-import { getCheckout, getUserById, savePesanan } from '../../confiq/firebase'
-import { useNavigate, useParams } from 'react-router-dom'
+import { getCheckout, getUserById, savePesanan, saveUserData } from '../../confiq/firebase'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import Loading from '../../components/Loading'
 import Swal from 'sweetalert2'
 import CONFIQ from '../../confiq/confiq'
@@ -52,19 +52,20 @@ function Index ({ onLogout }) {
     const { checkout } = await getCheckout(id)
     const { user } = await getUserById(checkout.idUser)
     setUser(user)
-    console.log(user)
     setProdukCheckout(checkout)
     setLoading(false)
   }
 
-  const options = user.alamat?.map((c) => ({
-    value: c,
-    label: <div>
+  const options = user.alamat === ''
+    ? []
+    : user.alamat?.map((c) => ({
+      value: c,
+      label: <div>
     <h6>Nama Penerima : <b>{c.namaPenerima}</b></h6>
     <h6>No Hp : {c.notelp}</h6>
     <span>{c.tujuan}</span>
   </div>
-  }))
+    }))
 
   const optionsPengiriman = pengiriman.map((c) => ({
     value: c,
@@ -91,14 +92,21 @@ function Index ({ onLogout }) {
   async function buatPesanan () {
     const pesanan = {
       checkout: produkChekout,
+      iduser: user.idUser,
       idPemesanan: id,
       alamatPengiriman: valueAlamat,
       jasaPengiriman: valueJasa,
       biayaLayanan,
       totalPembayaran
     }
+
+    const pesananUser = {
+      idPemesanan: id
+    }
+
     if (valueAlamat !== '' && valueJasa !== '') {
       const result = await savePesanan({ ...pesanan })
+      const userr = await saveUserData({ ...user, pesananUser })
       Swal.fire('Berhasil', 'Pesanan berhasil dibuat!', 'success').then(navigate('/'))
     } else if (valueAlamat === '' && valueJasa !== '') {
       Swal.fire('Gagal', 'Alamat tidak boleh kosong!', 'error')
@@ -140,7 +148,9 @@ function Index ({ onLogout }) {
               <div className="card mt-4">
               <div className="card-header">Alamat Tujuan</div>
               <div className="card-body">
-                <Select options={options} onChange={handleSelectAlamat}/>
+                {
+                  user.alamat === '' ? <Link to='/profile/alamat'>Buat Alamat</Link> : <Select options={options} onChange={handleSelectAlamat}/>
+                }
               </div>
             </div>
           </div>

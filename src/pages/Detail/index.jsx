@@ -48,6 +48,7 @@ function Index ({ onLogout }) {
     const dataKeranjang = {
       idKeranjang: +new Date(),
       idBarang: id,
+      idMitra: produk.idMitra,
       jumlah,
       totalHarga
     }
@@ -68,6 +69,7 @@ function Index ({ onLogout }) {
   async function beliSekarang () {
     const dataBarang = {
       idBarang: produk.idBrg,
+      idMitra: produk.idMitra,
       jumlah,
       totalHarga
     }
@@ -93,6 +95,7 @@ function Index ({ onLogout }) {
     })
     getProdukById()
     getDataUser()
+    console.log(produk)
   }, [id])
 
   return (

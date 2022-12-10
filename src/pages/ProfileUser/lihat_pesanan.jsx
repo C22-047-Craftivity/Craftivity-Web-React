@@ -1,42 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import CONFIQ from '../../confiq/confiq'
+import { getAllPemesanan } from '../../confiq/firebase'
+import Loading from '../../components/Loading'
+
 function LihatPesananPage ({ titlePage, subtitlePage }) {
-  return (
-    <div>
-      <div className="mb-4">
-        <h2 className="font-weight-bold">{titlePage}</h2>
-        <h6>{subtitlePage}</h6>
+  const [pesanan, setPesanan] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  async function getPesanan () {
+    setLoading(true)
+    const { dataPemesanan } = await getAllPemesanan()
+    setPesanan(dataPemesanan)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getPesanan()
+  }, [])
+
+  function ItemPesanan ({ pesanan }) {
+    return (
+      <div className="card">
+        <div className="card-body">{pesanan.biayaLayanan}</div>
       </div>
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-          <small id="emailHelp" class="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
+    )
+  }
+
+  return (
+    <div className="card shadow">
+      <Loading visible={loading} />
+      <div className="card-body">
+        <div className="mb-4">
+          <h2 className="font-weight-bold">{titlePage}</h2>
+          <h6>{subtitlePage}</h6>
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-          />
+        <div className="row">
+          {pesanan.map((data, i) =>
+            data.iduser === localStorage.getItem(CONFIQ.authUser)
+              ? (
+              <ItemPesanan pesanan={data} />
+                )
+              : (
+                  'error'
+                )
+          )}
         </div>
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-          <label class="form-check-label" for="exampleCheck1">
-            Check me out
-          </label>
-        </div>
-        <button type="submit" class="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      </div>
     </div>
   )
 }
