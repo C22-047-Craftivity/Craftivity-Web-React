@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app'
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-=======
 import { initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth'
 import { getDatabase, ref, set, child, get } from 'firebase/database'
@@ -13,15 +5,11 @@ import { getStorage, ref as refImg, uploadBytes, getDownloadURL } from 'firebase
 import Swal from 'sweetalert2'
 import moment from 'moment'
 
->>>>>>> development
 const firebaseConfig = {
   apiKey: 'AIzaSyDqpZ9A-ACeB9rXKiA59590yAYmEVyNsuo',
   authDomain: 'craftivity-batch3.firebaseapp.com',
   projectId: 'craftivity-batch3',
-<<<<<<< HEAD
-=======
   databaseURL: 'https://craftivity-batch3-default-rtdb.firebaseio.com/',
->>>>>>> development
   storageBucket: 'craftivity-batch3.appspot.com',
   messagingSenderId: '261963559720',
   appId: '1:261963559720:web:bfbb0e8d45f7eed67f561d'
@@ -29,10 +17,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
-<<<<<<< HEAD
-
-export default app
-=======
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app)
 // Initialize Realtime Database and get a reference to the service
@@ -402,4 +386,3 @@ export function getAllPemesanan () {
       })
   )
 }
->>>>>>> development
